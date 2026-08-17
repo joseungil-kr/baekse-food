@@ -25,8 +25,8 @@ faq:
     a: "네, 브랜드 사용 없이 레시피와 조리 노하우만 배우는 기술전수 모델이 있습니다. 5일 집중 교육으로 진행되며, 자세한 커리큘럼은 전수교육 페이지에서 확인하실 수 있습니다."
   - q: "기존에 운영 중인 매장에 메뉴만 넣을 수 있나요?"
     a: "샵인샵 또는 소스 단순납품 모델로 가능합니다. 기존 주방 설비를 그대로 쓰면서 2일 교육 후 바로 판매할 수 있습니다."
-  - q: "산채정식 창업도 준비 중이라고 들었어요."
-    a: "네, 산채정식은 백세푸드가 다음으로 준비 중인 브랜드입니다. 사전 상담을 신청하시면 출점 일정과 조건을 우선 안내해 드립니다."
+  - q: "백세포차는 지금 바로 창업할 수 있나요?"
+    a: "네. 백세포차는 21:00~02:00 심야 시간대에 운영하는 브랜드로, 닭한마리 저녁 장사와 이어서 바로 시작할 수 있습니다. 자세한 내용은 백세포차 페이지에서 확인하세요."
 ---
 
 <section id="brands">
@@ -39,8 +39,8 @@ faq:
     <div class="thumb"><img src="/img/bs-brand-1.webp" alt="백세보리밥 점심 정식" loading="lazy"></div>
     <div class="body">
       <span class="tag">01 LUNCH · 11:00–15:00</span>
-      <h3 class="h3">백세보리밥</h3>
-      <p>높은 회전율. <a href="/boribap/">보리밥 창업</a>만으로 임대료를 해결하는 구조를 만듭니다.</p>
+      <h3 class="h3">백세보리밥 산채정식</h3>
+      <p>높은 회전율. <a href="/boribap/">보리밥 산채정식 창업</a>만으로 임대료를 해결하는 구조를 만듭니다.</p>
     </div>
   </article>
   <article class="card">
@@ -56,7 +56,7 @@ faq:
     <div class="body">
       <span class="tag">03 LATE NIGHT · 21:00–02:00</span>
       <h3 class="h3">백세포차</h3>
-      <p>홍희통닭 제휴 쌀치킨과 포차 안주로 야간 고마진을 완성합니다.</p>
+      <p>닭강정, 쌀치킨, 오뎅탕, 마른안주 등 푸짐한 포차 안주로 야간 고마진을 완성합니다.</p>
     </div>
   </article>
 </div>
@@ -76,7 +76,7 @@ faq:
 <p class="lead" style="max-width:640px">2006년 3월 TV생생정보, 흑삼계탕 국내 최초 방송. 그 <a href="/academy/">레시피 교육</a>이 지금의 원팩이 되었습니다.</p>
 <div class="grid grid-4" style="margin-top:24px">
   <figure style="margin:0"><div style="aspect-ratio:4/5;overflow:hidden"><img src="/img/bs-menu-1.webp" alt="흑삼계탕 시그니처 메뉴" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div><figcaption style="font-size:13px;padding-top:10px;color:var(--muted)">흑삼계탕 · 시그니처</figcaption></figure>
-  <figure style="margin:0"><div style="aspect-ratio:4/5;overflow:hidden"><img src="/img/bs-menu-2.webp" alt="보리밥 정식" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div><figcaption style="font-size:13px;padding-top:10px;color:var(--muted)">보리밥 정식 · 점심</figcaption></figure>
+  <figure style="margin:0"><div style="aspect-ratio:4/5;overflow:hidden"><img src="/img/bs-menu-2.webp" alt="보리밥 산채정식" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div><figcaption style="font-size:13px;padding-top:10px;color:var(--muted)">보리밥 산채정식 · 점심</figcaption></figure>
   <figure style="margin:0"><div style="aspect-ratio:4/5;overflow:hidden"><img src="/img/bs-menu-3.webp" alt="닭한마리 전골" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div><figcaption style="font-size:13px;padding-top:10px;color:var(--muted)">닭한마리 전골 · 저녁</figcaption></figure>
   <figure style="margin:0"><div style="aspect-ratio:4/5;overflow:hidden"><img src="/img/bs-menu-4.webp" alt="닭볶음탕" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div><figcaption style="font-size:13px;padding-top:10px;color:var(--muted)">닭볶음탕 · 저녁</figcaption></figure>
 </div>
@@ -123,7 +123,7 @@ faq:
       </tbody>
     </table>
   </div>
-  <span style="font-size:12.5px;color:var(--dimmer);line-height:1.8">비용은 점포 상태·평수·상권에 따라 달라지므로 상담 시 실측 견적으로 안내드립니다. 레시피만 배우고 싶다면 <a href="/academy/">전수교육 · 레시피 교육</a> 페이지를, 산채정식 창업이 궁금하다면 <a href="/sanchae/">산채정식 창업</a> 페이지를 확인하세요.</span>
+  <span style="font-size:12.5px;color:var(--dimmer);line-height:1.8">비용은 점포 상태·평수·상권에 따라 달라지므로 상담 시 실측 견적으로 안내드립니다. 레시피만 배우고 싶다면 <a href="/academy/">전수교육 · 레시피 교육</a> 페이지를, 심야 매출을 더하고 싶다면 <a href="/sanchae/">백세포차</a> 페이지를 확인하세요.</span>
 </div>
 </section>
 
