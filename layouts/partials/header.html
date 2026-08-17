@@ -4,7 +4,7 @@
     <span>baekse food</span>
   </a>
   <nav class="nav">
-    <a href="{{ "/" | absURL }}" {{ if eq .RelPermalink "/" }}class="active"{{ end }}>백세보리밥 닭한마리</a>
+    <a href="{{ "/" | absURL }}" {{ if eq .RelPermalink "/" }}class="active"{{ end }}>백세푸드</a>
     <a href="{{ "/academy/" | absURL }}" {{ if in .RelPermalink "/academy/" }}class="active"{{ end }}>닭한마리 전수</a>
     <a href="{{ "/sauce/" | absURL }}" {{ if in .RelPermalink "/sauce/" }}class="active"{{ end }}>닭한마리 소스</a>
     <a href="{{ "/boribap/" | absURL }}" {{ if in .RelPermalink "/boribap/" }}class="active"{{ end }}>보리밥 산채정식</a>
