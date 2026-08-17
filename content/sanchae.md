@@ -57,7 +57,7 @@ faq:
 <p class="lead" style="max-width:640px">닭강정, 쌀치킨, 오뎅탕, 마른안주부터 닭꼬치, 닭도리탕, 불닭발, 생맥주까지 — 심야 손님이 찾는 메뉴로 구성했습니다.</p>
 <div class="grid grid-2" style="margin-top:24px">
   <figure style="margin:0"><div style="aspect-ratio:16/10;overflow:hidden"><img src="/img/bs-brand-3.webp" alt="백세포차 쌀치킨과 생맥주" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div><figcaption style="font-size:13px;padding-top:10px;color:var(--muted)">쌀치킨 · 생맥주</figcaption></figure>
-  <figure style="margin:0"><div style="aspect-ratio:16/10;overflow:hidden"><img src="/img/bs-menu-5.webp" alt="백세포차 닭강정과 생맥주" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div><figcaption style="font-size:13px;padding-top:10px;color:var(--muted)">닭강정 · 생맥주</figcaption></figure>
+  <figure style="margin:0"><div style="aspect-ratio:16/10;overflow:hidden"><img src="/img/bs-menu-8.webp" alt="백세포차 닭강정과 생맥주" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div><figcaption style="font-size:13px;padding-top:10px;color:var(--muted)">닭강정 · 생맥주</figcaption></figure>
 </div>
 <div class="stat-row" style="margin-top:24px">
   <div class="stat"><b>닭강정 · 쌀치킨</b><span>메인 안주</span></div>
