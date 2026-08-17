@@ -73,7 +73,7 @@ faq:
 <section id="menu">
 <span class="eyebrow">02 / menu gallery</span>
 <h2 class="h2">35년의 손맛,<br>원팩으로 표준화</h2>
-<p class="lead" style="max-width:640px">2006년 3월 TV생생정보, 흑삼계탕 국내 최초 방송. 그 <a href="/academy/">레시피 교육</a>이 지금의 원팩이 되었습니다.</p>
+<p class="lead" style="max-width:700px">2006년 3월 TV생생정보, 흑삼계탕 국내 최초 방송. 그 <a href="/academy/">레시피 교육</a>이 지금의 원팩이 되었습니다.</p>
 <div class="grid grid-4" style="margin-top:24px">
   <figure style="margin:0"><div style="aspect-ratio:4/5;overflow:hidden"><img src="/img/bs-menu-1.webp" alt="삼계탕 시그니처 메뉴" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div><figcaption style="font-size:13px;padding-top:10px;color:var(--muted)">흑삼계탕 · 들깨삼계탕 · 녹두삼계탕</figcaption></figure>
   <figure style="margin:0"><div style="aspect-ratio:4/5;overflow:hidden"><img src="/img/bs-menu-2.webp" alt="보리밥 산채정식" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div><figcaption style="font-size:13px;padding-top:10px;color:var(--muted)">보리밥 산채정식 · 점심</figcaption></figure>
