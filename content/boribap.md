@@ -34,7 +34,7 @@ faq:
 
 <div class="grid grid-2" style="margin-top:24px">
   <figure style="margin:0"><div style="aspect-ratio:4/5;overflow:hidden"><img src="/img/bs-menu-2.webp" alt="보리밥 산채정식 비빔 한상" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div><figcaption style="font-size:13px;padding-top:10px;color:var(--muted)">보리밥 · 산채나물 비빔</figcaption></figure>
-  <figure style="margin:0"><div style="aspect-ratio:4/5;overflow:hidden"><img src="/img/Gemini_Generated_Image_646shy646shy646s.png" alt="가정식 된장찌개와 나물 반찬" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div><figcaption style="font-size:13px;padding-top:10px;color:var(--muted)">된장찌개 · 나물 반찬</figcaption></figure>
+  <figure style="margin:0"><div style="aspect-ratio:4/5;overflow:hidden"><img src="/img/bs-menu-7.webp" alt="가정식 된장찌개와 나물 반찬" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div><figcaption style="font-size:13px;padding-top:10px;color:var(--muted)">된장찌개 · 나물 반찬</figcaption></figure>
 </div>
 </section>
 
