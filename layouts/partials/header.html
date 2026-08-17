@@ -1,0 +1,13 @@
+<header class="header">
+  <a href="{{ "/" | absURL }}" class="brand">
+    <img src="{{ "assets/baekse-logo.png" | absURL }}" alt="백세푸드 로고">
+    <span>baekse food</span>
+  </a>
+  <nav class="nav">
+    <a href="{{ "/" | absURL }}" {{ if eq .RelPermalink "/" }}class="active"{{ end }}>닭한마리·보리밥</a>
+    <a href="{{ "/academy/" | absURL }}" {{ if in .RelPermalink "/academy/" }}class="active"{{ end }}>전수교육</a>
+    <a href="{{ "/boribap/" | absURL }}" {{ if in .RelPermalink "/boribap/" }}class="active"{{ end }}>보리밥 창업</a>
+    <a href="{{ "/sanchae/" | absURL }}" {{ if in .RelPermalink "/sanchae/" }}class="active"{{ end }}>산채정식</a>
+    <a href="#apply" class="btn btn-outline">무료 상담 신청</a>
+  </nav>
+</header>

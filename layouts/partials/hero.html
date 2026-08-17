@@ -1,0 +1,13 @@
+<section class="hero">
+  <div class="bg"><img src="{{ .Params.heroImage | absURL }}" alt="{{ .Params.heroImageAlt }}" loading="eager"></div>
+  <div class="scrim"></div>
+  <div class="inner">
+    <span class="eyebrow">{{ .Params.heroEyebrow }}</span>
+    <h1 class="h1">{{ .Params.heroTitle | safeHTML }}</h1>
+    <p class="lead" style="max-width:620px">{{ .Params.heroLead }}</p>
+    <div class="cta-row">
+      {{ with .Params.ctaPrimary }}<a href="{{ .href }}" class="btn btn-primary">{{ .label }}</a>{{ end }}
+      {{ with .Params.ctaSecondary }}<a href="{{ .href }}" class="btn btn-outline">{{ .label }}</a>{{ end }}
+    </div>
+  </div>
+</section>

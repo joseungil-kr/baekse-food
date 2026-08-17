@@ -1,0 +1,31 @@
+baseURL = "https://baeksefood.com/"
+locale = "ko-kr"
+title = "백세푸드 | 닭한마리 창업·보리밥 창업·전수교육"
+enableRobotsTXT = false
+summarylength = 40
+disableKinds = ["taxonomy", "term"]
+
+[params]
+  siteName = "백세푸드"
+  phone = "031-407-0103"
+  phoneHref = "tel:031-407-0103"
+  address = "경기도 안산시 상록구 석호로 101, 1층"
+  hours = "11:00 - 02:00 (연중무휴)"
+  naverMapUrl = "https://map.naver.com/p/search/안산시 상록구 석호로 101"
+  contactFormEmail = "REPLACE_WITH_BUSINESS_EMAIL"
+  ogImage = "/img/bs-hero.webp"
+  defaultDescription = "35년 요식업 노하우, 원팩 시스템으로 조리 편차 없는 백세푸드 창업. 닭한마리·보리밥·포차 3in1 브랜드로 인테리어 마진 0원, 본사 CK 직배송."
+
+[outputs]
+  home = ["HTML", "RSS"]
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[markup.tableOfContents]
+  startLevel = 2
+  endLevel = 4
+
+[sitemap]
+  changefreq = "weekly"
+  priority = 0.8

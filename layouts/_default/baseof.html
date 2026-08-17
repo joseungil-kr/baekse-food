@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+{{ partial "seo.html" . }}
+</head>
+<body>
+{{ partial "header.html" . }}
+{{ block "main" . }}{{ end }}
+{{ partial "footer.html" . }}
+{{ partial "sticky-cta.html" . }}
+<script src="{{ "js/site.js" | absURL }}" defer></script>
+</body>
+</html>

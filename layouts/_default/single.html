@@ -1,0 +1,11 @@
+{{ define "main" }}
+{{ partial "breadcrumb.html" . }}
+{{ partial "hero.html" . }}
+<section class="section">
+  <div class="container" style="display:flex;flex-direction:column;gap:clamp(40px,5vh,64px)">
+    {{ .Content }}
+  </div>
+</section>
+{{ partial "faq.html" . }}
+{{ partial "apply-form.html" (dict "page" . "defaultInterest" (.Params.interest | default "닭한마리")) }}
+{{ end }}
