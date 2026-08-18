@@ -65,5 +65,5 @@ faq:
     </tbody>
   </table>
 </div>
-<p style="margin-top:16px;font-size:13px;color:var(--dimmer)">이미 매장을 운영 중이며 메뉴만 추가하고 싶다면 <a href="/">홈에서 4-Way 창업 모델</a> 전체를 비교해 보세요. 보리밥 창업만 집중적으로 알아보려면 <a href="/boribap/">보리밥 창업 페이지</a>를 확인하세요.</p>
+<p style="margin-top:16px;font-size:13px;color:var(--dimmer)">이미 매장을 운영 중이며 메뉴만 추가하고 싶다면 <a href="/">홈에서 4-Way 창업 모델</a> 전체를 비교해 보세요. 보리밥 산채정식 창업만 집중적으로 알아보려면 <a href="/boribap/">보리밥 산채정식 페이지</a>를 확인하세요.</p>
 </section>
