@@ -4,6 +4,7 @@ title = "백세푸드 | 닭한마리 창업·보리밥 산채정식·백세포�
 enableRobotsTXT = false
 summarylength = 40
 disableKinds = ["taxonomy", "term"]
+paginatePath = "page"
 
 [params]
   siteName = "백세푸드"

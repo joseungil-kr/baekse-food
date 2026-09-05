@@ -1,0 +1,49 @@
+{{ define "main" }}
+<section class="section" style="border-top:none;padding-top:clamp(40px,6vh,80px)">
+  <div class="container">
+    <div style="display:flex;flex-direction:column;gap:18px;margin-bottom:clamp(36px,5vh,56px)">
+      <span class="eyebrow">official blog</span>
+      <h1 class="h2">백세푸드 공식블로그</h1>
+      <p class="lead" style="max-width:640px">닭한마리 레시피, 창업 노하우, 보리밥 프랜차이즈, 외식업 트렌드까지.<br>35년 요식업 전문가의 실전 정보를 만나보세요.</p>
+    </div>
+
+    <div class="blog-grid">
+      {{ $paginator := .Paginate .Pages 15 }}
+      {{ range $paginator.Pages }}
+      <a href="{{ .RelPermalink }}" class="blog-card">
+        {{ with .Params.heroImage }}
+        <div class="blog-thumb">
+          <img src="{{ . }}" alt="{{ $.Params.heroImageAlt | default $.Title }}" loading="lazy">
+        </div>
+        {{ end }}
+        <div class="blog-body">
+          {{ with .Params.interest }}
+          <span class="blog-tag">{{ . }}</span>
+          {{ end }}
+          <h2 class="blog-title">{{ .Title }}</h2>
+          <p class="blog-desc">{{ .Description | truncate 100 }}</p>
+        </div>
+      </a>
+      {{ end }}
+    </div>
+
+    {{ if gt $paginator.TotalPages 1 }}
+    <nav class="blog-pagination">
+      {{ if $paginator.HasPrev }}
+      <a href="{{ $paginator.Prev.URL }}" class="btn btn-outline">← 이전</a>
+      {{ end }}
+
+      <div class="blog-page-numbers">
+        {{ range $paginator.Pagers }}
+        <a href="{{ .URL }}" class="blog-page-num {{ if eq . $paginator }}active{{ end }}">{{ .PageNumber }}</a>
+        {{ end }}
+      </div>
+
+      {{ if $paginator.HasNext }}
+      <a href="{{ $paginator.Next.URL }}" class="btn btn-outline">다음 →</a>
+      {{ end }}
+    </nav>
+    {{ end }}
+  </div>
+</section>
+{{ end }}
