@@ -93,11 +93,14 @@ faq:
 </div>
 
 <div class="grid grid-3" style="margin-top:24px">
-  <div class="card"><div class="body">
-    <span class="tag">ONE-PACK</span>
-    <h3 class="h3">원팩 시스템 · 10분 컷</h3>
-    <p>원팩 개봉 → 육수·다데기 투입 → 10분 가열 후 서빙. 계량·손질 없이 맛 편차 0을 만듭니다.</p>
-  </div></div>
+  <div class="card">
+    <div class="thumb"><img src="/img/bs-sys-onepack.jpg" alt="원팩 시스템 간편 조리" loading="lazy"></div>
+    <div class="body">
+      <span class="tag">ONE-PACK</span>
+      <h3 class="h3">원팩 시스템 · 10분 컷</h3>
+      <p>원팩 개봉 → 육수·다데기 투입 → 10분 가열 후 서빙. 계량·손질 없이 맛 편차 0을 만듭니다.</p>
+    </div>
+  </div>
   <div class="card">
     <div class="thumb"><img src="/img/bs-sys-logistics.webp" alt="본사 직배송 냉장 물류" loading="lazy"></div>
     <div class="body"><span class="tag">LOGISTICS</span><h3 class="h3">식자재 직배송</h3><p>본사 직영 신선육과 소스를 최저가로 공급합니다. 중간 유통 단계 없음.</p></div>
