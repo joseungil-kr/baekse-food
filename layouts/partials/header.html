@@ -1,14 +1,58 @@
+{{- $lang := .Lang -}}
+{{- $homeText := "백세푸드" -}}
+{{- $academyText := "닭한마리 전수" -}}
+{{- $sauceText := "닭한마리 소스" -}}
+{{- $boribapText := "보리밥 산채정식" -}}
+{{- $pochaText := "백세포차" -}}
+{{- $applyText := "무료 상담 신청" -}}
+
+{{- if eq $lang "en" -}}
+  {{- $homeText = "Home" -}}
+  {{- $academyText = "Recipe Academy" -}}
+  {{- $sauceText = "Sauce Supply" -}}
+  {{- $boribapText = "Barley Bibimbap" -}}
+  {{- $pochaText = "Night Pocha" -}}
+  {{- $applyText = "Inquiry" -}}
+{{- else if eq $lang "zh" -}}
+  {{- $homeText = "首页" -}}
+  {{- $academyText = "秘方传授" -}}
+  {{- $sauceText = "酱料供应" -}}
+  {{- $boribapText = "大麦饭定食" -}}
+  {{- $pochaText = "百世大排档" -}}
+  {{- $applyText = "加盟咨询" -}}
+{{- else if eq $lang "ja" -}}
+  {{- $homeText = "ホーム" -}}
+  {{- $academyText = "レシピ伝授" -}}
+  {{- $sauceText = "ソース供給" -}}
+  {{- $boribapText = "麦飯山菜定食" -}}
+  {{- $pochaText = "屋台ポチャ" -}}
+  {{- $applyText = "無料相談" -}}
+{{- else if eq $lang "ru" -}}
+  {{- $homeText = "Главная" -}}
+  {{- $academyText = "Обучение" -}}
+  {{- $sauceText = "Поставки соусов" -}}
+  {{- $boribapText = "Корейская кухня" -}}
+  {{- $pochaText = "Ночная Поча" -}}
+  {{- $applyText = "Консультация" -}}
+{{- end -}}
+
 <header class="header">
-  <a href="{{ "/" | absURL }}" class="brand">
-    <img src="{{ "assets/baekse-logo.png" | absURL }}" alt="백세푸드 로고">
+  <a href="{{ relLangURL "/" }}" class="brand">
+    <img src="{{ "assets/baekse-logo.png" | absURL }}" alt="{{ .Site.Params.siteName }} Logo">
     <span>baekse food</span>
   </a>
   <nav class="nav">
-    <a href="{{ "/" | absURL }}" {{ if eq .RelPermalink "/" }}class="active"{{ end }}>백세푸드</a>
-    <a href="{{ "/academy/" | absURL }}" {{ if in .RelPermalink "/academy/" }}class="active"{{ end }}>닭한마리 전수</a>
-    <a href="{{ "/sauce/" | absURL }}" {{ if in .RelPermalink "/sauce/" }}class="active"{{ end }}>닭한마리 소스</a>
-    <a href="{{ "/boribap/" | absURL }}" {{ if in .RelPermalink "/boribap/" }}class="active"{{ end }}>보리밥 산채정식</a>
-    <a href="{{ "/sanchae/" | absURL }}" {{ if in .RelPermalink "/sanchae/" }}class="active"{{ end }}>백세포차</a>
-    <a href="#apply" class="btn btn-outline">무료 상담 신청</a>
+    <a href="{{ relLangURL "/" }}" {{ if eq .RelPermalink (relLangURL "/") }}class="active"{{ end }}>{{ $homeText }}</a>
+    <a href="{{ relLangURL "/academy/" }}" {{ if in .RelPermalink "/academy/" }}class="active"{{ end }}>{{ $academyText }}</a>
+    <a href="{{ relLangURL "/sauce/" }}" {{ if in .RelPermalink "/sauce/" }}class="active"{{ end }}>{{ $sauceText }}</a>
+    <a href="{{ relLangURL "/boribap/" }}" {{ if in .RelPermalink "/boribap/" }}class="active"{{ end }}>{{ $boribapText }}</a>
+    <a href="{{ relLangURL "/sanchae/" }}" {{ if in .RelPermalink "/sanchae/" }}class="active"{{ end }}>{{ $pochaText }}</a>
+    <a href="#apply" class="btn btn-outline" style="padding:10px 18px;font-size:13px">{{ $applyText }}</a>
+
+    <div class="lang-switcher">
+      {{ range .AllTranslations }}
+        <a href="{{ .RelPermalink }}" class="lang-item {{ if eq .Lang $.Lang }}active{{ end }}">{{ .Language.Label }}</a>
+      {{ end }}
+    </div>
   </nav>
 </header>

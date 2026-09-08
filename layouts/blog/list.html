@@ -1,10 +1,26 @@
 {{ define "main" }}
+{{- $prevText := "← 이전" -}}
+{{- $nextText := "다음 →" -}}
+{{- if eq .Lang "en" -}}
+  {{- $prevText = "← Prev" -}}
+  {{- $nextText = "Next →" -}}
+{{- else if eq .Lang "zh" -}}
+  {{- $prevText = "← 上一页" -}}
+  {{- $nextText = "下一页 →" -}}
+{{- else if eq .Lang "ja" -}}
+  {{- $prevText = "← 前へ" -}}
+  {{- $nextText = "次へ →" -}}
+{{- else if eq .Lang "ru" -}}
+  {{- $prevText = "← Назад" -}}
+  {{- $nextText = "Вперед →" -}}
+{{- end -}}
+
 <section class="section" style="border-top:none;padding-top:clamp(40px,6vh,80px)">
   <div class="container">
     <div style="display:flex;flex-direction:column;gap:18px;margin-bottom:clamp(36px,5vh,56px)">
       <span class="eyebrow">official blog</span>
-      <h1 class="h2">백세푸드 공식블로그</h1>
-      <p class="lead" style="max-width:640px">닭한마리 레시피, 창업 노하우, 보리밥 프랜차이즈, 외식업 트렌드까지.<br>35년 요식업 전문가의 실전 정보를 만나보세요.</p>
+      <h1 class="h2">{{ .Title }}</h1>
+      <p class="lead" style="max-width:640px">{{ .Description }}</p>
     </div>
 
     <div class="blog-grid">
@@ -30,7 +46,7 @@
     {{ if gt $paginator.TotalPages 1 }}
     <nav class="blog-pagination">
       {{ if $paginator.HasPrev }}
-      <a href="{{ $paginator.Prev.URL }}" class="btn btn-outline">← 이전</a>
+      <a href="{{ $paginator.Prev.URL }}" class="btn btn-outline">{{ $prevText }}</a>
       {{ end }}
 
       <div class="blog-page-numbers">
@@ -40,7 +56,7 @@
       </div>
 
       {{ if $paginator.HasNext }}
-      <a href="{{ $paginator.Next.URL }}" class="btn btn-outline">다음 →</a>
+      <a href="{{ $paginator.Next.URL }}" class="btn btn-outline">{{ $nextText }}</a>
       {{ end }}
     </nav>
     {{ end }}

@@ -1,24 +1,80 @@
+{{- $lang := .Lang -}}
+{{- $homeText := "백세푸드" -}}
+{{- $academyText := "닭한마리 전수" -}}
+{{- $sauceText := "닭한마리 소스" -}}
+{{- $boribapText := "보리밥 산채정식" -}}
+{{- $pochaText := "백세포차" -}}
+{{- $applyText := "무료 상담 신청" -}}
+{{- $mapText := "본점 오시는 길" -}}
+{{- $blogText := "공식블로그" -}}
+{{- $subText := "백세보리밥 산채정식 · 백세닭한마리 · 백세포차<br>35년 전통 · 본사 CK 팩토리 직영 · 인테리어 마진 0원" -}}
+
+{{- if eq $lang "en" -}}
+  {{- $homeText = "Home" -}}
+  {{- $academyText = "Recipe Academy" -}}
+  {{- $sauceText = "Sauce Supply" -}}
+  {{- $boribapText = "Barley Bibimbap" -}}
+  {{- $pochaText = "Night Pocha" -}}
+  {{- $applyText = "Inquiry" -}}
+  {{- $mapText = "Store Location" -}}
+  {{- $blogText = "Official Blog" -}}
+  {{- $subText = "Baekse Barley Rice · Dakhanmari · Night Pocha<br>35 Years Culinary Heritage · Direct CK Logistics" -}}
+{{- else if eq $lang "zh" -}}
+  {{- $homeText = "首页" -}}
+  {{- $academyText = "秘方传授" -}}
+  {{- $sauceText = "酱料供应" -}}
+  {{- $boribapText = "大麦饭定食" -}}
+  {{- $pochaText = "百世大排档" -}}
+  {{- $applyText = "加盟咨询" -}}
+  {{- $mapText = "总店路线" -}}
+  {{- $blogText = "官方博客" -}}
+  {{- $subText = "百世大麦饭 · 百世一只鸡 · 百世大排档<br>35年正宗餐饮 · 自营中央厨房直供" -}}
+{{- else if eq $lang "ja" -}}
+  {{- $homeText = "ホーム" -}}
+  {{- $academyText = "レシピ伝授" -}}
+  {{- $sauceText = "ソース供給" -}}
+  {{- $boribapText = "麦飯山菜定食" -}}
+  {{- $pochaText = "屋台ポチャ" -}}
+  {{- $applyText = "無料相談" -}}
+  {{- $mapText = "本店アクセス" -}}
+  {{- $blogText = "公式ブログ" -}}
+  {{- $subText = "百世麦飯 · 百世タッカンマリ · 百世ポチャ<br>35年の伝統 · 直営セントラルキッチン直送" -}}
+{{- else if eq $lang "ru" -}}
+  {{- $homeText = "Главная" -}}
+  {{- $academyText = "Обучение" -}}
+  {{- $sauceText = "Поставки соусов" -}}
+  {{- $boribapText = "Корейская кухня" -}}
+  {{- $pochaText = "Ночная Поча" -}}
+  {{- $applyText = "Консультация" -}}
+  {{- $mapText = "Как добраться" -}}
+  {{- $blogText = "Официальный блог" -}}
+  {{- $subText = "Baekse Food · Традиционная корейская кухня<br>35 лет опыта · Прямые поставки соусов" -}}
+{{- end -}}
+
 <footer class="footer">
   <div class="inner">
     <div>
-      <img src="{{ "assets/baekse-logo.png" | absURL }}" alt="백세푸드 로고">
-      <span style="font-size:12.5px;color:#7E7668;line-height:1.9">백세보리밥 산채정식 · 백세닭한마리 · 백세포차<br>{{ .Site.Params.address }} · {{ .Site.Params.phone }}<br>요식업 35년 · 본사 CK 팩토리 직영 · 인테리어 마진 0원</span>
+      <img src="{{ "assets/baekse-logo.png" | absURL }}" alt="{{ .Site.Params.siteName }} Logo">
+      <span style="font-size:12.5px;color:#7E7668;line-height:1.9">
+        {{ $subText | safeHTML }}<br>
+        {{ .Site.Params.address }} · {{ .Site.Params.phone }}
+      </span>
     </div>
     <div class="cols">
       <div>
         <span class="label">MENU</span>
-        <a href="{{ "/" | absURL }}">백세푸드</a>
-        <a href="{{ "/academy/" | absURL }}">닭한마리 전수</a>
-        <a href="{{ "/sauce/" | absURL }}">닭한마리 소스</a>
-        <a href="{{ "/boribap/" | absURL }}">보리밥 산채정식</a>
-        <a href="{{ "/sanchae/" | absURL }}">백세포차</a>
+        <a href="{{ relLangURL "/" }}">{{ $homeText }}</a>
+        <a href="{{ relLangURL "/academy/" }}">{{ $academyText }}</a>
+        <a href="{{ relLangURL "/sauce/" }}">{{ $sauceText }}</a>
+        <a href="{{ relLangURL "/boribap/" }}">{{ $boribapText }}</a>
+        <a href="{{ relLangURL "/sanchae/" }}">{{ $pochaText }}</a>
       </div>
       <div>
         <span class="label">CONTACT</span>
         <a href="{{ .Site.Params.phoneHref }}">{{ .Site.Params.phone }}</a>
-        <a href="#apply">무료 상담 신청</a>
-        <a href="{{ .Site.Params.naverMapUrl }}" target="_blank" rel="noreferrer">본점 오시는 길</a>
-        <a href="{{ "/blog/" | absURL }}">공식블로그</a>
+        <a href="#apply">{{ $applyText }}</a>
+        <a href="{{ .Site.Params.naverMapUrl }}" target="_blank" rel="noreferrer">{{ $mapText }}</a>
+        <a href="{{ relLangURL "/blog/" }}">{{ $blogText }}</a>
       </div>
     </div>
   </div>

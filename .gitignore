@@ -3,3 +3,5 @@ resources/
 .hugo_build.lock
 src_bakcup/
 legacy/
+__pycache__/
+*.pyc

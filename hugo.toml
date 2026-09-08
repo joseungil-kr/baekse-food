@@ -1,6 +1,6 @@
 baseURL = "https://baeksefood.com/"
-locale = "ko-kr"
-title = "백세푸드 | 닭한마리 창업·보리밥 산채정식·백세포차·전수교육"
+defaultContentLanguage = "ko"
+defaultContentLanguageInSubdir = false
 enableRobotsTXT = false
 summarylength = 40
 disableKinds = ["taxonomy", "term"]
@@ -16,6 +16,62 @@ paginatePath = "page"
   contactFormEmail = "joseungil@Gmail.com"
   ogImage = "/img/bs-hero.webp"
   defaultDescription = "35년 요식업 노하우, 원팩 시스템으로 조리 편차 없는 백세푸드 창업. 닭한마리·보리밥 산채정식·백세포차 3in1 브랜드로 인테리어 마진 0원, 본사 CK 직배송."
+
+[languages]
+  [languages.ko]
+    locale = "ko-kr"
+    label = "한국어"
+    weight = 1
+    title = "백세푸드 | 닭한마리 창업·보리밥 산채정식·백세포차·전수교육"
+    [languages.ko.params]
+      siteName = "백세푸드"
+      address = "경기도 안산시 상록구 석호로 101, 1층"
+      hours = "10:00 - 22:00 (연중무휴)"
+      defaultDescription = "35년 요식업 노하우, 원팩 시스템으로 조리 편차 없는 백세푸드 창업. 닭한마리·보리밥 산채정식·백세포차 3in1 브랜드로 인테리어 마진 0원, 본사 CK 직배송."
+
+  [languages.en]
+    locale = "en-us"
+    label = "EN"
+    weight = 2
+    title = "Baekse Food | Dakhanmari · Barley Bibimbap · Pocha"
+    [languages.en.params]
+      siteName = "Baekse Food"
+      address = "1F, 101 Seokho-ro, Sangnok-gu, Ansan-si, Gyeonggi-do, Korea"
+      hours = "10:00 - 22:00 (Open 365 Days)"
+      defaultDescription = "35 years of Korean culinary heritage. One-pack system for effortless cooking. Dakhanmari, barley bibimbap, and night pocha franchise & recipe education."
+
+  [languages.zh]
+    locale = "zh-cn"
+    label = "中文"
+    weight = 3
+    title = "百世食品 | 一只鸡加盟·大麦饭山菜定食·百世大排档·秘方传授"
+    [languages.zh.params]
+      siteName = "百世食品"
+      address = "韩国京畿道安山市常绿区石湖路101号1楼"
+      hours = "10:00 - 22:00 (全年无休)"
+      defaultDescription = "35年韩国餐饮积淀，一包料标准化中央厨房配送，韩国一只鸡、大麦饭、百世大排档加盟及秘方传授。"
+
+  [languages.ja]
+    locale = "ja-jp"
+    label = "日本語"
+    weight = 4
+    title = "百世フード | タッカンマリ創業・麦飯山菜定食・屋台ポチャ・伝授教育"
+    [languages.ja.params]
+      siteName = "百世フード"
+      address = "韓国京畿道安山市常緑区石湖路101、1階"
+      hours = "10:00 - 22:00 (年中無休)"
+      defaultDescription = "35年の飲食ノウハウ、ワンパックシステムでブレない味。タッカンマリ・麦飯・屋台ポチャ3in1ブランド＆秘伝レシピ伝授。"
+
+  [languages.ru]
+    locale = "ru-ru"
+    label = "RU"
+    weight = 5
+    title = "Baekse Food | Дакханмари · Корейская кухня · Франшиза"
+    [languages.ru.params]
+      siteName = "Baekse Food"
+      address = "1 эт., 101, Сокхо-ро, Саннок-гу, Ансан, Кёнги-до, Корея"
+      hours = "10:00 - 22:00 (Без выходных)"
+      defaultDescription = "35 лет опыта в ресторанном бизнесе Кореи. Система One-Pack для быстрого приготовления. Франшиза Дакханмари и обучение рецептам."
 
 [outputs]
   home = ["HTML", "RSS"]
