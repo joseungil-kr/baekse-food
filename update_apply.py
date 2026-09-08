@@ -1,4 +1,8 @@
-{{ $ctx := .page | default . }}
+import os
+
+path = r'c:\project\baekse-food\layouts\partials\apply-form.html'
+
+translations = '''{{ $ctx := .page | default . }}
 {{ $defaultInterest := .defaultInterest | default "닭한마리" }}
 {{- $lang := $ctx.Lang -}}
 
@@ -146,3 +150,9 @@
     </form>
   </div>
 </section>
+'''
+
+with open(path, 'w', encoding='utf-8') as f:
+    f.write(translations)
+
+print('Updated apply-form.html')

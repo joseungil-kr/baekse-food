@@ -71,7 +71,7 @@
       </div>
       <div>
         <span class="label">CONTACT</span>
-        <a href="{{ .Site.Params.phoneHref }}">{{ .Site.Params.phone }}</a>
+        <a href="{{ .Site.Params.phoneHref | safeURL }}">{{ .Site.Params.phone }}</a>
         <a href="#apply">{{ $applyText }}</a>
         <a href="{{ .Site.Params.naverMapUrl }}" target="_blank" rel="noreferrer">{{ $mapText }}</a>
         <a href="{{ relLangURL "/blog/" }}">{{ $blogText }}</a>

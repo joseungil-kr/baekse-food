@@ -1,4 +1,10 @@
-{{- $lang := .Lang -}}
+import os
+
+path = r'c:\project\baekse-food\layouts\partials\sticky-cta.html'
+with open(path, 'r', encoding='utf-8') as f:
+    content = f.read()
+
+translations = '''{{- $lang := .Lang -}}
 {{- $callText := "전화 상담" -}}
 {{- $applyText := "무료 상담 신청" -}}
 
@@ -19,4 +25,9 @@
 <div class="sticky-cta">
   <a href="{{ .Site.Params.phoneHref | safeURL }}" class="call">{{ $callText }}</a>
   <a href="#apply" class="apply">{{ $applyText }}</a>
-</div>
+</div>'''
+
+with open(path, 'w', encoding='utf-8') as f:
+    f.write(translations)
+
+print('Updated sticky-cta.html')

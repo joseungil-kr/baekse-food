@@ -1,4 +1,10 @@
-{{ if .Params.faq }}
+import os
+
+path = r'c:\project\baekse-food\layouts\partials\faq.html'
+with open(path, 'r', encoding='utf-8') as f:
+    content = f.read()
+
+translations = '''{{ if .Params.faq }}
 {{- $lang := .Lang -}}
 {{- $faqTitle := "자주 묻는 질문" -}}
 {{- $faqLead := "답을 찾지 못하셨다면 전화로 바로 물어보세요." -}}
@@ -24,20 +30,19 @@
       <h2 class="h2">{{ $faqTitle }}</h2>
       <p class="lead" style="max-width:420px">{{ $faqLead }}</p>
       <a href="{{ .Site.Params.phoneHref | safeURL }}" class="btn btn-outline" style="align-self:flex-start">{{ .Site.Params.phone }}</a>
-    </div>
-    <div class="faq-list">
-      {{ range .Params.faq }}
-      <details>
-        <summary>{{ .q }}</summary>
-        <p>{{ .a }}</p>
-      </details>
-      {{ end }}
-    </div>
-  </div>
-</div>
-{{ $items := slice }}
-{{ range .Params.faq }}
-{{ $items = $items | append (dict "@type" "Question" "name" .q "acceptedAnswer" (dict "@type" "Answer" "text" .a)) }}
-{{ end }}
-<script type="application/ld+json">{{ (dict "@context" "https://schema.org" "@type" "FAQPage" "mainEntity" $items) | jsonify }}</script>
-{{ end }}
+    </div>'''
+
+content = content.replace('''{{ if .Params.faq }}
+<div class="section">
+  <div class="container grid grid-2" style="align-items:start">
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <span class="eyebrow">FAQ</span>
+      <h2 class="h2">자주 묻는 질문</h2>
+      <p class="lead" style="max-width:420px">답을 찾지 못하셨다면 전화로 바로 물어보세요.</p>
+      <a href="{{ .Site.Params.phoneHref }}" class="btn btn-outline" style="align-self:flex-start">{{ .Site.Params.phone }}</a>
+    </div>''', translations)
+
+with open(path, 'w', encoding='utf-8') as f:
+    f.write(content)
+
+print('Updated faq.html')
