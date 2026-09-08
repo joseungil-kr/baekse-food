@@ -50,9 +50,10 @@
     <a href="#apply" class="btn btn-outline" style="padding:10px 18px;font-size:13px">{{ $applyText }}</a>
 
     <div class="lang-switcher">
-      {{ range .AllTranslations }}
-        <a href="{{ .RelPermalink }}" class="lang-item {{ if eq .Lang $.Lang }}active{{ end }}">{{ .Language.Label }}</a>
-      {{ end }}
+      {{- range $i, $item := .AllTranslations -}}
+        {{- if gt $i 0 -}}<span class="lang-dot">·</span>{{- end -}}
+        <a href="{{ $item.RelPermalink }}" class="lang-item {{ if eq $item.Lang $.Lang }}active{{ end }}">{{ $item.Language.Label }}</a>
+      {{- end -}}
     </div>
   </nav>
 </header>
