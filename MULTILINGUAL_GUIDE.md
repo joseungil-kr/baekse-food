@@ -59,7 +59,34 @@
 
 ---
 
-## 4. 다국어 URL 매핑 구조
+## 4. 기존 콘텐츠 수정 워크플로우
+
+한국어 페이지를 수정할 때는 **모든 언어 버전을 동기화**해야 합니다:
+
+1. **한국어 원문 수정**: `content/blog/[파일명].md` 또는 `content/[페이지명].md` 수정
+2. **4개 언어 버전 동기화 수정**:
+   - 구조, 이미지 경로, 메타데이터는 동일하게 유지
+   - 수정 내용을 각 언어별로 자연스럽게 반영
+   - `content/blog/[파일명].en.md`
+   - `content/blog/[파일명].zh.md`
+   - `content/blog/[파일명].ja.md`
+   - `content/blog/[파일명].ru.md`
+3. **정적 빌드 검증**:
+   ```powershell
+   hugo --minify
+   ```
+4. **Git 커밋 및 배포**:
+   ```bash
+   git add -A
+   git commit -m "fix/style/docs: [설명] 콘텐츠 수정 및 5개 국어 동기화"
+   git push
+   ```
+
+⚠️ **주의**: 한국어만 수정하고 외국어를 동기화하지 않으면 다국어 사이트의 정보 일관성이 깨집니다.
+
+---
+
+## 5. 다국어 URL 매핑 구조
 
 - 한국어: `https://baeksefood.com/blog/[파일명]/`
 - 영어: `https://baeksefood.com/en/blog/[파일명]/`
