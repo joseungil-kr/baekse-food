@@ -44,7 +44,7 @@ input, button, textarea { font-family: inherit; }
 .lang-switcher { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border: 1px solid var(--border); border-radius: 999px; background: rgba(245,241,232,.04); font-size: 11px; margin-left: 8px; }
 .lang-item { color: var(--dim); padding: 3px 6px; border-radius: 999px; transition: all .2s; }
 .lang-item:hover { color: var(--text); }
-.lang-item.active { background: var(--accent); color: #FFF7EF; font-weight: 600; }
+.lang-item.active { background: #FF8C42; color: #FFFFFF; font-weight: 600; }
 .lang-dot { color: var(--dimmer); font-size: 11px; user-select: none; opacity: .7; }
 
 .btn { display: inline-flex; align-items: center; gap: 10px; padding: 15px 26px; border-radius: 999px; font-size: 14px; letter-spacing: .04em; white-space: nowrap; cursor: pointer; border: 1px solid transparent; }
