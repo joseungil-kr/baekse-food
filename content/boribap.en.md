@@ -21,8 +21,8 @@ faq:
     a: "Yes. You can operate exclusively during lunchtime, or easily expand into evening Dakhanmari and late-night Pocha later since 80% of kitchen equipment and ingredients are compatible."
   - q: "Is single-person operation truly possible?"
     a: "Yes. Because mountain greens and sauces arrive in ready-to-serve One-Packs from our Central Kitchen, kitchen labor is minimized to simple plating and serving."
+tags: ["Boribap"]
 ---
-
 <section>
 <span class="eyebrow">01 / signature menu</span>
 <h2 class="h2">The Perfect Harmony of Nature,<br>Baekse Barley Bibimbap</h2>

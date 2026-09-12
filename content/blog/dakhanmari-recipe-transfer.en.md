@@ -14,9 +14,8 @@ ctaSecondary:
   label: "Inquire by Phone"
   href: "tel:031-407-0103"
 interest: "전수교육"
+tags: ["Dakhanmari", "Recipe Transfer"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / concept & distinction</span>
 <h2 class="h2">프랜차이즈의 한계를 넘어선<br>진짜 닭한마리 비법 전수란?</h2>

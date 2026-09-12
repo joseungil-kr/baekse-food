@@ -14,9 +14,8 @@ ctaSecondary:
   label: "Inquire by Phone"
   href: "tel:031-407-0103"
 interest: "보리밥 산채정식"
+tags: ["Ansan Restaurant", "Boribap"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / seasonal greens table</span>
 <h2 class="h2">제대로 된 안산 산채정식 맛집을 찾는다면,<br>자연의 생명력을 담은 백세보리밥</h2>

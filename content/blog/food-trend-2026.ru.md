@@ -14,9 +14,8 @@ ctaSecondary:
   label: "Позвонить нам"
   href: "tel:031-407-0103"
 interest: "닭한마리"
+tags: ["Управление", "Франшиза"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / market shift</span>
 <h2 class="h2">2026 외식 창업 트렌드를 이끄는<br>4대 핵심 키워드</h2>

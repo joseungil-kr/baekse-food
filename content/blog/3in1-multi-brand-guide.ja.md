@@ -14,9 +14,8 @@ ctaSecondary:
   label: "お電話でのお問い合わせ"
   href: "tel:031-407-0103"
 interest: "닭한마리"
+tags: ["創業案内"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / what is 3in1</span>
 <h2 class="h2">복합매장(멀티브랜드) 창업이<br>외식업의 새로운 대세가 된 이유</h2>

@@ -14,9 +14,8 @@ ctaSecondary:
   label: "电话咨询"
   href: "tel:031-407-0103"
 interest: "닭한마리"
+tags: ["小资本创业", "创业费用"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / market trends</span>
 <h2 class="h2">소자본 음식점 창업 아이템 추천,<br>2026년 외식 시장의 새로운 기준</h2>

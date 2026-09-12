@@ -14,9 +14,8 @@ ctaSecondary:
   label: "Позвонить нам"
   href: "tel:031-407-0103"
 interest: "백세포차"
+tags: ["Поча", "Стоимость запуска"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / reality check</span>
 <h2 class="h2">화려한 겉모습 뒤에 숨겨진 포차 창업 비용과 현실적인 리스크</h2>

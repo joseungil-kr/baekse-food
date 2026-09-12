@@ -14,9 +14,8 @@ ctaSecondary:
   label: "お電話でのお問い合わせ"
   href: "tel:031-407-0103"
 interest: "닭한마리"
+tags: ["収益性", "店舗運営"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / budget leaks</span>
 <h2 class="h2">창업 자금이 줄줄 새는<br>외식 프랜차이즈의 4대 거품</h2>

@@ -14,9 +14,8 @@ ctaSecondary:
   label: "Inquire by Phone"
   href: "tel:031-407-0103"
 interest: "닭한마리"
+tags: ["Store Operations", "Profitability"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / cost formula</span>
 <h2 class="h2">식당 순이익을 좌우하는<br>식자재 원가율 관리의 정석</h2>

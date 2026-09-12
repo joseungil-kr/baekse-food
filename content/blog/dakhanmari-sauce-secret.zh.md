@@ -14,9 +14,8 @@ ctaSecondary:
   label: "电话咨询"
   href: "tel:031-407-0103"
 interest: "닭한마리 소스"
+tags: ["一只鸡", "食谱"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / flavor triad</span>
 <h2 class="h2">닭한마리 소스의 비밀,<br>3대 양념이 만드는 미학적 밸런스</h2>

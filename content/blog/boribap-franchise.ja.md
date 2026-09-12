@@ -14,9 +14,8 @@ ctaSecondary:
   label: "お電話でのお問い合わせ"
   href: "tel:031-407-0103"
 interest: "보리밥 산채정식"
+tags: ["麦飯", "創業案内"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / market trend</span>
 <h2 class="h2">불황에도 꺾이지 않는 보리밥 프랜차이즈 창업의 시장성</h2>

@@ -14,9 +14,8 @@ ctaSecondary:
   label: "电话咨询"
   href: "tel:031-407-0103"
 interest: "닭한마리"
+tags: ["参鸡汤", "菜单介绍"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / the four varieties</span>
 <h2 class="h2">삼계탕 종류와 효능,<br>대한민국 대표 4대 삼계탕 특징 비교</h2>

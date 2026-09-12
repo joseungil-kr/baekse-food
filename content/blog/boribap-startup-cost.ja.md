@@ -14,9 +14,8 @@ ctaSecondary:
   label: "お電話でのお問い合わせ"
   href: "tel:031-407-0103"
 interest: "보리밥 산채정식"
+tags: ["麦飯", "創業費用"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / cost breakdown</span>
 <h2 class="h2">보리밥집 창업 초기비용의 실제 구성 항목 뜯어보기</h2>

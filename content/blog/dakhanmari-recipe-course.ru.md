@@ -14,9 +14,8 @@ ctaSecondary:
   label: "Позвонить нам"
   href: "tel:031-407-0103"
 interest: "전수교육"
+tags: ["Дакханмари", "Передача рецепта"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / 5-day roadmap</span>
 <h2 class="h2">단 5일 만에 완성되는 주방의 기적,<br>닭한마리 레시피 전수 교육 과정 커리큘럼</h2>

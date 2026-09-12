@@ -14,9 +14,8 @@ ctaSecondary:
   label: "お電話でのお問い合わせ"
   href: "tel:031-407-0103"
 interest: "닭한마리 소스"
+tags: ["物流供給", "ワンパックシステム"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / restaurateur dilemma</span>
 <h2 class="h2">주방의 영원한 숙제,<br>음식점 소스 OEM vs 직접 제조의 현실적 한계</h2>

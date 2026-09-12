@@ -14,9 +14,8 @@ ctaSecondary:
   label: "お電話でのお問い合わせ"
   href: "tel:031-407-0103"
 interest: "닭한마리"
+tags: ["タッカンマリ", "創業案内"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / checklist</span>
 <h2 class="h2">닭한마리 프랜차이즈 비교 시<br>반드시 따져봐야 할 5대 기준</h2>

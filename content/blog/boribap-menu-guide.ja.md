@@ -14,9 +14,8 @@ ctaSecondary:
   label: "お電話でのお問い合わせ"
   href: "tel:031-407-0103"
 interest: "보리밥 산채정식"
+tags: ["麦飯", "メニュー案内"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / menu structure</span>
 <h2 class="h2">손님이 다시 찾는 보리밥 산채정식 메뉴 구성의 황금 법칙</h2>

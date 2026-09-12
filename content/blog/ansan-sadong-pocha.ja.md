@@ -14,9 +14,8 @@ ctaSecondary:
   label: "お電話でのお問い合わせ"
   href: "tel:031-407-0103"
 interest: "백세포차"
+tags: ["安山グルメ", "百世ポチャ"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / night hideout</span>
 <h2 class="h2">상록구청 포차 찾으시면 백세포차,<br>사동의 밤을 밝히는 아지트</h2>

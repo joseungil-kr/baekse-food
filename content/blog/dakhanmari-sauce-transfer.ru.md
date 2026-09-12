@@ -14,9 +14,8 @@ ctaSecondary:
   label: "Позвонить нам"
   href: "tel:031-407-0103"
 interest: "전수교육"
+tags: ["Дакханмари", "Передача рецепта"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / importance of sauce</span>
 <h2 class="h2">담백한 육수에 생명을 불어넣는 마법,<br>왜 닭한마리 소스 전수가 결정적인가?</h2>

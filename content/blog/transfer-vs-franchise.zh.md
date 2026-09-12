@@ -14,9 +14,8 @@ ctaSecondary:
   label: "电话咨询"
   href: "tel:031-407-0103"
 interest: "전수교육"
+tags: ["秘方传授", "创业指南"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / comparative overview</span>
 <h2 class="h2">성공 창업의 첫 갈림길,<br>요식업 기술 전수 창업 vs 프랜차이즈 본질 비교</h2>

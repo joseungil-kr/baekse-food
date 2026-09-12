@@ -14,9 +14,8 @@ ctaSecondary:
   label: "Позвонить нам"
   href: "tel:031-407-0103"
 interest: "닭한마리 소스"
+tags: ["Дакханмари", "Логистика", "Бульон"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / hidden costs</span>
 <h2 class="h2">매장에서 직접 끓이는 육수,<br>진짜 원가를 계산해 보셨습니까?</h2>

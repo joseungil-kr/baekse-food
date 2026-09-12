@@ -14,9 +14,8 @@ ctaSecondary:
   label: "Позвонить нам"
   href: "tel:031-407-0103"
 interest: "닭한마리"
+tags: ["Дакханмари", "Меню"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / timing & broth control</span>
 <h2 class="h2">닭한마리 칼국수 맛있게 먹는법,<br>최적의 타이밍과 육수 농도 조절</h2>

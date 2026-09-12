@@ -14,9 +14,8 @@ ctaSecondary:
   label: "电话咨询"
   href: "tel:031-407-0103"
 interest: "백세포차"
+tags: ["店中店", "创业指南"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / concept</span>
 <h2 class="h2">위기의 자영업, 샵인샵(Shop in Shop) 창업이 대세가 된 이유</h2>

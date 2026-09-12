@@ -14,9 +14,8 @@ ctaSecondary:
   label: "Inquire by Phone"
   href: "tel:031-407-0103"
 interest: "닭한마리"
+tags: ["Menu Guide", "Samgyetang"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / recipe & preparation</span>
 <h2 class="h2">닭곰탕 vs 삼계탕 차이,<br>조리법과 식재료의 근본적 구분</h2>

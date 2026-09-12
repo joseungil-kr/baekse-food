@@ -14,9 +14,8 @@ ctaSecondary:
   label: "Inquire by Phone"
   href: "tel:031-407-0103"
 interest: "보리밥 산채정식"
+tags: ["Store Operations", "Boribap"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / golden rules</span>
 <h2 class="h2">외식업 생존을 결정짓는 점심 장사 잘되는 메뉴의 3대 성공 공식</h2>

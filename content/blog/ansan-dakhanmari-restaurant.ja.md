@@ -14,9 +14,8 @@ ctaSecondary:
   label: "お電話でのお問い合わせ"
   href: "tel:031-407-0103"
 interest: "닭한마리"
+tags: ["安山グルメ", "タッカンマリ"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / authentic broth heritage</span>
 <h2 class="h2">35년 세월이 우려낸 깊은 맛,<br>안산 닭한마리 맛집의 핵심은 육수입니다</h2>

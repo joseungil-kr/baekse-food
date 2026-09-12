@@ -14,9 +14,8 @@ ctaSecondary:
   label: "电话咨询"
   href: "tel:031-407-0103"
 interest: "백세포차"
+tags: ["门店运营", "百世大排档", "收益性"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / night sales problem</span>
 <h2 class="h2">밤 9시만 되면 텅 비는 식당, 야간 매출 올리는 법이 절실한 이유</h2>

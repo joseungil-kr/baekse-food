@@ -14,9 +14,8 @@ ctaSecondary:
   label: "お電話でのお問い合わせ"
   href: "tel:031-407-0103"
 interest: "닭한마리 소스"
+tags: ["タッカンマリ", "物流供給"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / selection criteria</span>
 <h2 class="h2">주방의 운명을 좌우하는 파트너,<br>닭한마리 소스 납품 업체 선택의 4대 기준</h2>

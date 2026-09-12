@@ -21,8 +21,8 @@ faq:
     a: "Because there is no need to simmer bones for 8 hours or measure seasonings in-house, existing kitchen staff can serve restaurant-grade hot pots without a specialized chef."
   - q: "Can I add Dakhanmari to an existing restaurant menu?"
     a: "Yes. You can introduce Dakhanmari as a single hero item on your current menu under your own restaurant name without franchise franchise fees."
+tags: ["Logistics"]
 ---
-
 <section>
 <span class="eyebrow">01 / what's included</span>
 <h2 class="h2">Fully Prepared upon Delivery,<br>The Complete Dakhanmari Kit</h2>

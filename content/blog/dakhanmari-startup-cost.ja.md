@@ -14,9 +14,8 @@ ctaSecondary:
   label: "お電話でのお問い合わせ"
   href: "tel:031-407-0103"
 interest: "닭한마리"
+tags: ["タッカンマリ", "創業費用"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / cost breakdown</span>
 <h2 class="h2">닭한마리 창업 비용 현실,<br>항목별 실제 견적 분석</h2>

@@ -14,9 +14,8 @@ ctaSecondary:
   label: "电话咨询"
   href: "tel:031-407-0103"
 interest: "닭한마리"
+tags: ["食谱", "一只鸡", "高汤"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / home broth recipe</span>
 <h2 class="h2">닭한마리 육수 만드는법,<br>가정에서 성공하는 기본 가이드</h2>

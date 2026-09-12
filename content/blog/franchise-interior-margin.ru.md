@@ -14,9 +14,8 @@ ctaSecondary:
   label: "Позвонить нам"
   href: "tel:031-407-0103"
 interest: "닭한마리"
+tags: ["Стоимость запуска", "Франшиза"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / hidden truth</span>
 <h2 class="h2">가맹점주는 모르는<br>프랜차이즈 인테리어 마진의 진실</h2>

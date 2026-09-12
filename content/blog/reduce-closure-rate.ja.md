@@ -14,9 +14,8 @@ ctaSecondary:
   label: "お電話でのお問い合わせ"
   href: "tel:031-407-0103"
 interest: "닭한마리"
+tags: ["店舗運営", "収益性"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / closure factors</span>
 <h2 class="h2">통계로 확인하는<br>음식점 폐업의 4대 결정적 원인</h2>

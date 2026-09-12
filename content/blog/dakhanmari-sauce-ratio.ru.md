@@ -14,9 +14,8 @@ ctaSecondary:
   label: "Позвонить нам"
   href: "tel:031-407-0103"
 interest: "닭한마리 소스"
+tags: ["Дакханмари", "Рецепт"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / standard ratio</span>
 <h2 class="h2">전문점 맛을 100% 살리는<br>닭한마리 양념장 황금비율 기본 공식</h2>

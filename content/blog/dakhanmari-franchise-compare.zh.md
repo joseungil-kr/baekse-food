@@ -14,9 +14,8 @@ ctaSecondary:
   label: "电话咨询"
   href: "tel:031-407-0103"
 interest: "닭한마리"
+tags: ["一只鸡", "创业指南"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / checklist</span>
 <h2 class="h2">닭한마리 프랜차이즈 비교 시<br>반드시 따져봐야 할 5대 기준</h2>

@@ -14,9 +14,8 @@ ctaSecondary:
   label: "Inquire by Phone"
   href: "tel:031-407-0103"
 interest: "닭한마리"
+tags: ["Store Operations", "Small Capital"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / solo prerequisites</span>
 <h2 class="h2">1인 창업 가능한 음식점이<br>갖춰야 할 3대 필수 조건</h2>

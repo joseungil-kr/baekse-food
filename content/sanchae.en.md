@@ -21,8 +21,8 @@ faq:
     a: "Yes. Main items like dakgangjeong, rice chicken, braised chicken, and spicy chicken feet are delivered ready-to-cook from our Central Kitchen, requiring only quick frying or reheating."
   - q: "Can I operate Pocha as a standalone franchise?"
     a: "Yes, though combining it with evening Dakhanmari doubles revenue in the same space since 80% of poultry ingredients are shared."
+tags: ["Baekse Pocha"]
 ---
-
 <section>
 <span class="eyebrow">01 / why late night works</span>
 <h2 class="h2">Even After Dinner Ends,<br>The Kitchen Lights Up Once More</h2>

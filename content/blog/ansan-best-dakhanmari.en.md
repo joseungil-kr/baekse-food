@@ -14,8 +14,8 @@ ctaSecondary:
   label: "Inquiry by Phone"
   href: "tel:031-407-0103"
 interest: "닭한마리"
+tags: ["Ansan Restaurant", "Dakhanmari"]
 ---
-
 <section>
 <h2 class="h2">The Pinnacle of Chicken Cuisine, Born from 35 Years of Tradition</h2>
 <p class="lead">Starting as a Samgyetang (ginseng chicken soup) specialty store, we developed our own unique 'Dakhanmari' sauce after years of extensive research.</p>

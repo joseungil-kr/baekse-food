@@ -25,8 +25,8 @@ faq:
     a: "Yes, our Master Recipe Transfer program allows you to operate independently under your own brand name. It is an intensive 5-day hands-on course taught at our flagship store."
   - q: "Can I add these menu items to my existing restaurant?"
     a: "Yes, through our Shop-in-Shop or Bulk Sauce Supply models. You can utilize your current kitchen setup and start serving after a concise 2-day training program."
+tags: ["Franchise Guide", "Dakhanmari"]
 ---
-
 <section id="brands">
 <span class="eyebrow">01 / brand matrix</span>
 <h2 class="h2">Three Brands a Day,<br>Operating from a Single Kitchen</h2>

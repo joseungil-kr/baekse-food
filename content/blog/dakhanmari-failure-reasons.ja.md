@@ -14,9 +14,8 @@ ctaSecondary:
   label: "お電話でのお問い合わせ"
   href: "tel:031-407-0103"
 interest: "닭한마리"
+tags: ["タッカンマリ", "店舗運営", "創業案内"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / four traps</span>
 <h2 class="h2">닭한마리 창업 실패 이유,<br>사장님들을 무너뜨리는 4대 함정</h2>

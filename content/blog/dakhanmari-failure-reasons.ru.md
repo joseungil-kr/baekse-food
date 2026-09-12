@@ -14,9 +14,8 @@ ctaSecondary:
   label: "Позвонить нам"
   href: "tel:031-407-0103"
 interest: "닭한마리"
+tags: ["Дакханмари", "Управление", "Франшиза"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / four traps</span>
 <h2 class="h2">닭한마리 창업 실패 이유,<br>사장님들을 무너뜨리는 4대 함정</h2>

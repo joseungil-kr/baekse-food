@@ -23,8 +23,8 @@ faq:
     a: "Yes. Even after completing the course, you have the option to order premade broths, pastes, and sauces from our Central Kitchen whenever convenient."
   - q: "Can I follow the course without prior cooking experience?"
     a: "Yes. Our curriculum is built on strictly measured gram-level recipes and standardized manuals, enabling complete beginners to reproduce identical flavors in 5 days."
+tags: ["Recipe Transfer"]
 ---
-
 <section>
 <span class="eyebrow">01 / what you learn</span>
 <h2 class="h2">Master Authentic Dakhanmari<br>in Just 5 Days</h2>

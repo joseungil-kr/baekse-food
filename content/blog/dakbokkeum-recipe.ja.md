@@ -14,9 +14,8 @@ ctaSecondary:
   label: "お電話でのお問い合わせ"
   href: "tel:031-407-0103"
 interest: "닭한마리"
+tags: ["レシピ", "メニュー案内"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / chicken prep & blanching</span>
 <h2 class="h2">닭볶음탕 맛있게 끓이는법,<br>잡내를 100% 잡는 전처리 공식</h2>

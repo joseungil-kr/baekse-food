@@ -14,9 +14,8 @@ ctaSecondary:
   label: "电话咨询"
   href: "tel:031-407-0103"
 interest: "닭한마리"
+tags: ["一只鸡", "菜单介绍"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / course guide</span>
 <h2 class="h2">닭한마리 맛있게 먹는법<br>실패 없는 4단계 코스 정석</h2>

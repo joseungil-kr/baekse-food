@@ -14,9 +14,8 @@ ctaSecondary:
   label: "电话咨询"
   href: "tel:031-407-0103"
 interest: "보리밥 산채정식"
+tags: ["大麦饭", "菜单介绍"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / nutritional facts</span>
 <h2 class="h2">슈퍼푸드 보리의 재발견: 백미와 비교할 수 없는 풍부한 영양성분</h2>

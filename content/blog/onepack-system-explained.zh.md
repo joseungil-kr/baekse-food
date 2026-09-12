@@ -14,9 +14,8 @@ ctaSecondary:
   label: "电话咨询"
   href: "tel:031-407-0103"
 interest: "닭한마리"
+tags: ["一包料系统", "门店运营"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / concept & definition</span>
 <h2 class="h2">원팩 시스템 창업이란?<br>개념과 외식업의 패러다임 전환</h2>

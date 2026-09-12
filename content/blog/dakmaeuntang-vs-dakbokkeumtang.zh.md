@@ -14,9 +14,8 @@ ctaSecondary:
   label: "电话咨询"
   href: "tel:031-407-0103"
 interest: "닭한마리"
+tags: ["菜单介绍"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / fundamental difference</span>
 <h2 class="h2">닭매운탕이랑 닭볶음탕 차이가 뭐지?<br>핵심은 '국물의 성격'과 '부재료'입니다</h2>

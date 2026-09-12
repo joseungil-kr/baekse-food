@@ -14,9 +14,8 @@ ctaSecondary:
   label: "电话咨询"
   href: "tel:031-407-0103"
 interest: "닭한마리 소스"
+tags: ["一包料系统", "物流供应"]
 ---
-
-
 <section>
 <span class="eyebrow">01 / concept & evolution</span>
 <h2 class="h2">외식 산업의 패러다임을 바꾼 혁신,<br>CK 센트럴키친 납품 시스템이란?</h2>
