@@ -1,0 +1,2456 @@
+<!DOCTYPE html>
+<html lang="{{ .Lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>{{ .Title }}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Pretendard:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-cream: #FAF3E3;
+      --brown-dark: #3E271C;
+      --brown-mid: #6E4A35;
+      --brown-line: #D9C3A4;
+      --orange-main: #E65525;
+      --orange-glow: #FF9838;
+      --green-point: #3B843E;
+      --font-hand: 'Gaegu', cursive, sans-serif;
+      --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
+    }
+    body {
+      background-color: #EFE5D0;
+      background-image: radial-gradient(#D8C3A5 1.2px, transparent 1.2px);
+      background-size: 22px 22px;
+      font-family: var(--font-sans);
+      color: var(--brown-dark);
+      min-height: 100dvh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: hidden;
+    }
+    .game-shell {
+      width: 100%;
+      max-width: 480px;
+      height: 100dvh;
+      max-height: 920px;
+      background: #FFFDF8;
+      box-shadow: 0 20px 50px rgba(62, 39, 28, 0.22);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+    @media (min-width: 500px) {
+      .game-shell {
+        height: 94dvh;
+        border-radius: 28px;
+        border: 4px solid #5C3D2E;
+      }
+    }
+
+    /* Header Bar */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 16px;
+      background: #FBF2DF;
+      border-bottom: 2px dashed var(--brown-line);
+      z-index: 20;
+      flex-shrink: 0;
+    }
+    .top-bar a {
+      text-decoration: none;
+      color: var(--brown-mid);
+      font-weight: 800;
+      font-size: 13.5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 10px;
+      background: #FFF;
+      border-radius: 20px;
+      border: 1.5px solid #E2CEB1;
+      transition: transform 0.15s;
+    }
+    .top-bar a:active { transform: scale(0.95); }
+    .sound-btn {
+      background: #FFF;
+      border: 1.5px solid #E2CEB1;
+      color: var(--brown-mid);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* ================= 1. INTRO SCREEN ================= */
+    #screen-intro {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px 18px;
+      background: linear-gradient(180deg, rgba(255,252,244,0.88) 0%, rgba(253,245,228,0.96) 100%), url('/img/game/game_bg.webp') center/cover no-repeat;
+      overflow-y: auto;
+      text-align: center;
+    }
+    .intro-header {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .title-card {
+      position: relative;
+      width: 100%;
+      max-width: 360px;
+      background: rgba(255, 253, 247, 0.95);
+      border: 2.5px solid #DEC6A4;
+      border-radius: 20px;
+      padding: 9px 14px 9px;
+      margin-bottom: 6px;
+      box-shadow: 0 6px 18px rgba(74, 51, 38, 0.08);
+    }
+    .title-card-quote {
+      font-family: var(--font-hand);
+      font-size: 16.5px;
+      font-weight: 700;
+      color: var(--brown-mid);
+    }
+    .title-card-main {
+      font-family: var(--font-hand);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--brown-dark);
+      line-height: 1.12;
+      letter-spacing: -0.5px;
+      text-shadow: 0 2px 0 #F3E2C7;
+    }
+    .title-brand-ribbon {
+      display: inline-block;
+      background: #6E4A35;
+      color: #FFFDF8;
+      font-family: var(--font-hand);
+      font-size: 17px;
+      font-weight: 700;
+      padding: 2px 15px 3px;
+      border-radius: 99px;
+      margin-top: 3px;
+    }
+    .floating-chick {
+      position: absolute;
+      right: -6px;
+      top: -8px;
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      animation: bobbing 2.2s ease-in-out infinite;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.12));
+    }
+    @keyframes bobbing {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-6px) rotate(6deg); }
+    }
+
+    /* 3 Game Mode Switch Icon Cards */
+    .mode-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 7px;
+      width: 100%;
+      margin: 4px 0 8px;
+    }
+    .mode-tab {
+      background: rgba(255, 255, 255, 0.92);
+      border: 2.5px solid #E2D1B5;
+      border-radius: 16px;
+      padding: 8px 6px;
+      font-family: var(--font-sans);
+      color: var(--brown-mid);
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+    .mode-tab.active {
+      background: #FFF9F2;
+      border-color: var(--orange-main);
+      color: var(--brown-dark);
+      box-shadow: 0 6px 16px rgba(230, 85, 37, 0.22);
+      transform: translateY(-3px);
+    }
+    .mode-icon-box {
+      position: relative;
+      width: 48px;
+      height: 46px;
+      background: #FAF0DC;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 5px;
+      border: 1.5px solid #E6D2B2;
+    }
+    .mode-tab.active .mode-icon-box {
+      background: #FFE8D4;
+      border-color: #FFB380;
+    }
+    .mode-icon-main {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.12));
+    }
+    .mode-icon-sub {
+      position: absolute;
+      right: -5px;
+      bottom: -4px;
+      width: 23px;
+      height: 23px;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 3px rgba(0,0,0,0.18));
+    }
+    .mode-badge {
+      font-size: 9.5px;
+      font-weight: 900;
+      color: #9C7A63;
+      letter-spacing: 0.3px;
+    }
+    .mode-tab.active .mode-badge {
+      color: var(--orange-main);
+    }
+    .mode-name {
+      font-size: 13px;
+      font-weight: 900;
+      color: var(--brown-dark);
+      margin-top: 1px;
+      letter-spacing: -0.3px;
+    }
+    .mode-sub {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--brown-mid);
+      margin-top: 1px;
+    }
+
+    .reward-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(90deg, #FFF3E0, #FFE4CC);
+      border: 2px solid #FFB380;
+      color: #D44110;
+      padding: 5px 14px;
+      border-radius: 99px;
+      font-size: 12.5px;
+      font-weight: 800;
+      box-shadow: 0 4px 12px rgba(230, 85, 37, 0.12);
+    }
+
+    /* Character Selection Cards */
+    .char-section {
+      width: 100%;
+      margin: 4px 0;
+    }
+    .char-prompt {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--brown-mid);
+      margin-bottom: 6px;
+    }
+    .char-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .char-box {
+      background: rgba(255, 255, 255, 0.92);
+      border: 2.5px solid #E2D1B5;
+      border-radius: 18px;
+      padding: 8px 8px;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .char-box.active {
+      background: #FFF9F2;
+      border-color: var(--orange-main);
+      box-shadow: 0 8px 20px rgba(230, 85, 37, 0.2);
+      transform: translateY(-2px);
+    }
+    .char-check {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #E2D1B5;
+      color: #FFF;
+      font-size: 11px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .char-box.active .char-check {
+      background: var(--orange-main);
+    }
+    .char-sprite-preview {
+      height: 96px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 5px 7px rgba(62,39,28,0.14));
+      animation: charIdle 1.6s ease-in-out infinite;
+    }
+    @keyframes charIdle {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-4px) scale(1.02, 0.98); }
+    }
+    .char-name {
+      font-size: 14.5px;
+      font-weight: 900;
+      color: var(--brown-dark);
+      margin-top: 3px;
+    }
+    .char-desc {
+      font-family: var(--font-hand);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--brown-mid);
+    }
+
+    /* Item / Mode Info Strip */
+    .item-guide {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.88);
+      border: 1.5px solid #E5D4B7;
+      border-radius: 14px;
+      padding: 7px 8px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin-bottom: 8px;
+      min-height: 64px;
+    }
+    .guide-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--brown-mid);
+    }
+    .guide-item img {
+      width: 30px;
+      height: 30px;
+      object-fit: contain;
+      margin-bottom: 2px;
+    }
+    .guide-item span.pts {
+      font-weight: 800;
+      color: var(--orange-main);
+    }
+    .guide-item.bad span.pts {
+      color: #666;
+    }
+    .mix-stage-arrow {
+      font-size: 13px;
+      font-weight: 900;
+      color: #C7A980;
+    }
+
+    .btn-play {
+      width: 100%;
+      background: linear-gradient(135deg, #F06430 0%, #D94111 100%);
+      color: #FFF;
+      border: none;
+      border-radius: 16px;
+      padding: 14px;
+      font-size: 18px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(217, 65, 17, 0.35), inset 0 2px 0 rgba(255,255,255,0.3);
+      transition: transform 0.12s;
+    }
+    .btn-play:active { transform: scale(0.97); }
+
+    /* ================= 2. GAMEPLAY SCREEN ================= */
+    #screen-game {
+      display: none;
+      flex-direction: column;
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      touch-action: none;
+    }
+    .hud-header {
+      background: rgba(255, 249, 237, 0.95);
+      border-bottom: 2px solid #E4D0B0;
+      padding: 8px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .hud-profile {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .hud-face-wrap {
+      width: 56px;
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.16s cubic-bezier(0.22, 1, 0.36, 1);
+      filter: drop-shadow(0 3px 6px rgba(62, 39, 28, 0.18));
+    }
+    .hud-face-wrap.pop {
+      transform: scale(1.22) rotate(-4deg);
+    }
+    .hud-face-wrap img {
+      width: 54px;
+      height: 52px;
+      object-fit: contain;
+    }
+    .hud-bubble {
+      background: #FFF;
+      border: 1.5px solid #DEC8A6;
+      border-radius: 14px;
+      border-bottom-left-radius: 3px;
+      padding: 5px 11px;
+      font-family: var(--font-hand);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--brown-dark);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+      max-width: 175px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .hud-counters {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .stat-box {
+      background: #FFF;
+      border: 1.5px solid #E2CEB1;
+      border-radius: 12px;
+      padding: 4px 10px;
+      text-align: center;
+      min-width: 68px;
+    }
+    .stat-label {
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--brown-mid);
+      display: block;
+    }
+    .stat-val {
+      font-size: 17px;
+      font-weight: 900;
+      color: var(--brown-dark);
+    }
+    .stat-val.timer-urgent {
+      color: #E02424;
+    }
+
+    #canvas-wrap {
+      flex: 1;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: url('/img/game/game_bg.webp') center/cover no-repeat;
+      overflow: hidden;
+    }
+    #gameCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      cursor: pointer;
+    }
+    .drag-guide {
+      position: absolute;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(62, 39, 28, 0.78);
+      color: #FFF;
+      font-size: 12.5px;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 99px;
+      pointer-events: none;
+      white-space: nowrap;
+      backdrop-filter: blur(4px);
+      transition: opacity 0.4s;
+    }
+
+    /* ================= 3. RESULT & COUPON SCREEN ================= */
+    #screen-result {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 18px 24px;
+      flex: 1;
+      background: linear-gradient(180deg, #FFFDF8 0%, #FAF0DC 100%);
+      overflow-y: auto;
+      text-align: center;
+    }
+    .result-hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .couple-celebrate {
+      height: 165px;
+      object-fit: contain;
+      filter: drop-shadow(0 8px 16px rgba(62, 39, 28, 0.15));
+      animation: bobbing 2.5s ease-in-out infinite;
+    }
+    .result-quote {
+      font-family: var(--font-hand);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--orange-main);
+      margin-top: 4px;
+    }
+    .result-score-pill {
+      background: #F4E6CE;
+      color: var(--brown-dark);
+      font-size: 14px;
+      font-weight: 800;
+      padding: 5px 16px;
+      border-radius: 99px;
+      margin: 4px 0 10px;
+    }
+    .result-score-pill strong {
+      color: var(--orange-main);
+      font-size: 16px;
+    }
+
+    /* Coupon Ticket Design */
+    .coupon-ticket {
+      width: 100%;
+      background: #FFFFFF;
+      border: 3px solid var(--orange-main);
+      border-radius: 22px;
+      padding: 18px 18px 14px;
+      box-shadow: 0 14px 32px rgba(230, 85, 37, 0.16);
+      position: relative;
+      margin-bottom: 14px;
+      overflow: hidden;
+    }
+    .coupon-ticket::before,
+    .coupon-ticket::after {
+      content: '';
+      position: absolute;
+      top: 52%;
+      width: 24px;
+      height: 24px;
+      background: #FCF5E8;
+      border: 3px solid var(--orange-main);
+      border-radius: 50%;
+    }
+    .coupon-ticket::before { left: -15px; }
+    .coupon-ticket::after { right: -15px; }
+
+    .coupon-top-tag {
+      display: inline-block;
+      background: var(--orange-main);
+      color: #FFF;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 99px;
+      margin-bottom: 6px;
+    }
+    .coupon-main-title {
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--brown-dark);
+      letter-spacing: -1px;
+      line-height: 1.15;
+    }
+    .coupon-main-title span {
+      color: var(--orange-main);
+    }
+    .coupon-sub-store {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--brown-mid);
+      margin-top: 2px;
+    }
+    .coupon-dash {
+      border-top: 2px dashed #E5D2B5;
+      margin: 12px 0;
+    }
+    .coupon-rules {
+      text-align: left;
+      background: #FBF5E9;
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      line-height: 1.65;
+      color: #6B503F;
+    }
+    .coupon-live-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 10px;
+      padding-top: 6px;
+      font-size: 11.5px;
+      font-weight: 800;
+    }
+    .verify-dot {
+      color: var(--green-point);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .verify-dot i {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: var(--green-point);
+      border-radius: 50%;
+      animation: blinkDot 1s infinite;
+    }
+    @keyframes blinkDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.35; transform: scale(0.8); }
+    }
+    .clock-text {
+      font-family: monospace;
+      color: #D44110;
+      font-size: 12px;
+      background: #FFF0E5;
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    .result-buttons {
+      width: 100%;
+      display: flex;
+      gap: 10px;
+    }
+    .btn-retry {
+      flex: 1;
+      background: #FFF;
+      border: 2px solid #D6C0A0;
+      color: var(--brown-dark);
+      font-size: 15px;
+      font-weight: 800;
+      padding: 14px;
+      border-radius: 14px;
+      cursor: pointer;
+    }
+    .btn-go-menu {
+      flex: 1.3;
+      background: var(--brown-dark);
+      color: #FFF;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 800;
+      padding: 14px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ==================== 4. FAIL SCREEN ==================== */
+    #screen-fail {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 22px 20px 28px;
+      flex: 1;
+      background: linear-gradient(180deg, #FFFDF9 0%, #F5E8D5 100%);
+      text-align: center;
+      overflow-y: auto;
+    }
+    .fail-badge {
+      display: inline-block;
+      background: #D62818;
+      color: #FFF;
+      font-size: 12.5px;
+      font-weight: 900;
+      padding: 5px 14px;
+      border-radius: 99px;
+      margin-bottom: 10px;
+      box-shadow: 0 4px 10px rgba(214, 40, 24, 0.25);
+    }
+    .fail-char-img {
+      width: 118px;
+      height: 118px;
+      object-fit: contain;
+      filter: drop-shadow(0 8px 16px rgba(62, 39, 28, 0.16));
+      margin-bottom: 8px;
+      animation: shakeSad 1.8s ease-in-out infinite;
+    }
+    @keyframes shakeSad {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      25% { transform: translateY(2px) rotate(-3deg); }
+      75% { transform: translateY(2px) rotate(3deg); }
+    }
+    .fail-title {
+      font-size: 26px;
+      font-weight: 900;
+      color: var(--brown-dark);
+      letter-spacing: -0.8px;
+      margin-bottom: 6px;
+    }
+    .fail-quote {
+      font-family: var(--font-hand);
+      font-size: 21px;
+      font-weight: 700;
+      color: #7A543E;
+      margin-bottom: 14px;
+    }
+    .fail-card {
+      width: 100%;
+      background: #FFFFFF;
+      border: 2.5px dashed #D68C65;
+      border-radius: 20px;
+      padding: 18px 16px;
+      margin-bottom: 18px;
+      box-shadow: 0 10px 24px rgba(62, 39, 28, 0.08);
+    }
+    .fail-score-now {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--brown-dark);
+      margin-bottom: 6px;
+    }
+    .fail-score-now strong {
+      color: #D62818;
+      font-size: 20px;
+      font-weight: 900;
+    }
+    .fail-target-box {
+      background: #FFF4EA;
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #B83B14;
+      margin-top: 8px;
+      line-height: 1.5;
+    }
+    .btn-retry-primary {
+      width: 100%;
+      background: linear-gradient(135deg, #FF7433 0%, #E04312 100%);
+      color: #FFF;
+      border: none;
+      border-radius: 16px;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(224, 67, 18, 0.32), inset 0 2px 0 rgba(255, 255, 255, 0.35);
+      margin-bottom: 10px;
+    }
+    .btn-retry-primary:active {
+      transform: translateY(2px);
+    }
+  </style>
+</head>
+<body>
+
+<div class="game-shell">
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <a href="/boribap/">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      백세보리밥 홈
+    </a>
+    <button id="soundBtn" class="sound-btn">🔊 효과음 ON</button>
+  </div>
+
+  <!-- 1. INTRO SCREEN -->
+  <div id="screen-intro">
+    <div class="intro-header">
+      <div class="title-card">
+        <div class="title-card-quote">오늘도 맛있는 하루, 조금 더 나은 우리!</div>
+        <div class="title-card-main">초보 자영업 사장의<br>고군분투 성장기 🌱</div>
+        <div class="title-brand-ribbon">백세보리밥 닭한마리</div>
+        <img src="/img/game/item_chicken_hd.png" alt="꼬마닭" class="floating-chick">
+      </div>
+
+      <!-- 3 Game Mode Selector Icon Cards -->
+      <div class="mode-tabs">
+        <button class="mode-tab active" id="tab-catch" onclick="selectGameMode('catch')">
+          <div class="mode-icon-box">
+            <img src="/img/game/item_dakhanmari_hd.png" alt="재료받기" class="mode-icon-main">
+            <img src="/img/game/item_boribap_hd.png" alt="보리밥" class="mode-icon-sub">
+          </div>
+          <span class="mode-badge">GAME 01</span>
+          <span class="mode-name">재료 받아라!</span>
+          <span class="mode-sub">목표 5,000점</span>
+        </button>
+
+        <button class="mode-tab" id="tab-mix" onclick="selectGameMode('mix')">
+          <div class="mode-icon-box">
+            <img src="/img/game/bibimbap_stage_3.png" alt="비빔밥" class="mode-icon-main">
+            <img src="/img/game/bibimbap_spoon.png?v=3" alt="수저" class="mode-icon-sub">
+          </div>
+          <span class="mode-badge">GAME 02</span>
+          <span class="mode-name">폭풍 비빔밥!</span>
+          <span class="mode-sub">목표 50회 비비기</span>
+        </button>
+
+        <button class="mode-tab" id="tab-sauce" onclick="selectGameMode('sauce')">
+          <div class="mode-icon-box">
+            <img src="/img/game/sauce_bowl_done.png" alt="특제소스" class="mode-icon-main">
+            <img src="/img/game/sauce_soy.png" alt="간장" class="mode-icon-sub">
+          </div>
+          <span class="mode-badge">GAME 03</span>
+          <span class="mode-name">황금비율 소스!</span>
+          <span class="mode-sub">15초 황금배합</span>
+        </button>
+      </div>
+
+      <div class="reward-pill" id="rewardPillText">
+        🎁 20초 내 <strong>5,000점 이상</strong> 달성 시 <strong>1,000원 할인권 증정!</strong>
+      </div>
+    </div>
+
+    <div class="char-section">
+      <div class="char-prompt">👇 오늘 함께 요리할 사장님을 골라주세요!</div>
+      <div class="char-grid">
+        <div class="char-box active" id="card-male" onclick="chooseCharacter('male')">
+          <div class="char-check">✓</div>
+          <img src="/img/game/male_run_1.png" alt="남사장님" class="char-sprite-preview" id="preview-male">
+          <div class="char-name">열정 남사장님</div>
+          <div class="char-desc">"서툴지만 늘 열정 가득!"</div>
+        </div>
+        <div class="char-box" id="card-female" onclick="chooseCharacter('female')">
+          <div class="char-check">✓</div>
+          <img src="/img/game/female_run_1.png" alt="여사장님" class="char-sprite-preview" id="preview-female">
+          <div class="char-name">똑순이 여사장님</div>
+          <div class="char-desc">"꼼꼼하게 다 챙겨야죠!"</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="width:100%">
+      <!-- Guide for Game 1 (Catch) -->
+      <div class="item-guide" id="guide-catch">
+        <div class="guide-item">
+          <img src="/img/game/item_boribap_hd.png" alt="보리밥">
+          <span>보리밥</span>
+          <span class="pts">+150</span>
+        </div>
+        <div class="guide-item">
+          <img src="/img/game/item_sanchae_hd.png" alt="산채나물">
+          <span>산채나물</span>
+          <span class="pts">+200</span>
+        </div>
+        <div class="guide-item">
+          <img src="/img/game/item_dakhanmari_hd.png" alt="닭한마리">
+          <span>닭한마리</span>
+          <span class="pts">+300</span>
+        </div>
+        <div class="guide-item">
+          <img src="/img/game/item_sesame_hd.png" alt="참기름">
+          <span>황금참기름</span>
+          <span class="pts">+450</span>
+        </div>
+        <div class="guide-item bad">
+          <img src="/img/game/item_bad_chili_hd.png" alt="탄고추">
+          <span>탄 고추</span>
+          <span class="pts">-150</span>
+        </div>
+      </div>
+
+      <!-- Guide for Game 2 (Mix) -->
+      <div class="item-guide" id="guide-mix" style="display:none;">
+        <div class="guide-item">
+          <img src="/img/game/bibimbap_stage_1.png" alt="1단계">
+          <span>재료 준비</span>
+          <span class="pts">START</span>
+        </div>
+        <div class="mix-stage-arrow">▶</div>
+        <div class="guide-item">
+          <img src="/img/game/bibimbap_stage_2.png" alt="2단계">
+          <span>폭풍 비비기</span>
+          <span class="pts">25회 돌파</span>
+        </div>
+        <div class="mix-stage-arrow">▶</div>
+        <div class="guide-item">
+          <img src="/img/game/bibimbap_stage_3.png" alt="3단계">
+          <span>황금 비빔밥!</span>
+          <span class="pts">50회 성공!</span>
+        </div>
+      </div>
+
+      <!-- Guide for Game 3 (Golden Ratio Sauce) -->
+      <div class="item-guide" id="guide-sauce" style="display:none;">
+        <div class="guide-item">
+          <img src="/img/game/sauce_soy.png" alt="특제간장">
+          <span>특제간장</span>
+          <span class="pts">3번</span>
+        </div>
+        <div class="guide-item">
+          <img src="/img/game/sauce_dadaegi.png" alt="다대기">
+          <span>다대기</span>
+          <span class="pts">1번</span>
+        </div>
+        <div class="guide-item">
+          <img src="/img/game/sauce_mustard.png" alt="겨자">
+          <span>겨자</span>
+          <span class="pts">1번</span>
+        </div>
+        <div class="guide-item">
+          <img src="/img/game/sauce_cabbage.png" alt="양배추">
+          <span>양배추</span>
+          <span class="pts">3번</span>
+        </div>
+        <div class="guide-item">
+          <img src="/img/game/sauce_chives.png" alt="부추">
+          <span>부추</span>
+          <span class="pts">1번</span>
+        </div>
+      </div>
+
+      <button class="btn-play" id="startBtnText" onclick="startGame()">
+        양푼 들고 재료 받기 시작! 🥣
+      </button>
+    </div>
+  </div>
+
+  <!-- 2. GAMEPLAY SCREEN -->
+  <div id="screen-game">
+    <div class="hud-header">
+      <div class="hud-profile">
+        <div class="hud-face-wrap" id="hudFaceBox">
+          <img id="hudFaceImg" src="/img/game/male_face_determined.png?v=3" alt="표정">
+        </div>
+        <div class="hud-bubble" id="hudBubble">파이팅! 다 챙겨야죠!</div>
+      </div>
+      <div class="hud-counters">
+        <div class="stat-box">
+          <span class="stat-label">남은시간</span>
+          <span class="stat-val" id="hudTime">20</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label" id="hudScoreLabel">열정점수</span>
+          <span class="stat-val" id="hudScore">0</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="canvas-wrap">
+      <canvas id="gameCanvas"></canvas>
+      <div class="drag-guide" id="dragGuide">👈 좌우로 드래그하여 양푼에 재료를 담으세요! 👉</div>
+    </div>
+  </div>
+
+  <!-- 3. RESULT & COUPON SCREEN (SUCCESS) -->
+  <div id="screen-result">
+    <div class="result-hero">
+      <img src="/img/game/couple_main.png?v=2" alt="부부 사장님" class="couple-celebrate">
+      <div class="result-quote">"맛있는 한 끼가 좋은 하루가 됩니다 ♥"</div>
+      <div class="result-score-pill" id="finalSummaryPill">
+        달성한 요리 점수: <strong id="finalScoreTxt">0</strong>점 (<span id="finalComboTxt">0</span>콤보!)
+      </div>
+    </div>
+
+    <div class="coupon-ticket">
+      <div class="coupon-top-tag">🎉 미션 성공! 고객 감사 쿠폰</div>
+      <div class="coupon-main-title"><span>1,000원</span> 즉시 할인권</div>
+      <div class="coupon-sub-store">백세보리밥 · 닭한마리 (안산 본점)</div>
+
+      <div class="coupon-dash"></div>
+
+      <div class="coupon-rules">
+        • <strong>사용 방법:</strong> 결제 시 이 화면을 <strong>캡처(스크린샷)</strong>하여 사장님/직원에게 보여주세요.<br>
+        • <strong>사용 안내:</strong> 테이블당 1매 적용 가능 · 정성껏 모시겠습니다!
+      </div>
+
+      <div class="coupon-live-bar">
+        <span class="verify-dot"><i></i> 실시간 정상 발급 쿠폰</span>
+        <span class="clock-text" id="liveClock">2026-10-17 18:00:00</span>
+      </div>
+    </div>
+
+    <div class="result-buttons">
+      <button class="btn-retry" onclick="backToIntro()">🔄 다른 게임 / 다시 하기</button>
+      <a href="/boribap/" class="btn-go-menu">메뉴 보러가기 →</a>
+    </div>
+  </div>
+
+  <!-- 4. MISSION FAIL SCREEN -->
+  <div id="screen-fail">
+    <span class="fail-badge">💦 미션 실패 · 아까워요!</span>
+    <img id="failCharImg" src="/img/game/male_face_sad.png?v=3" alt="아쉬운 사장님" class="fail-char-img">
+    <div class="fail-title" id="failTitleTxt">미션 달성 실패! 😢</div>
+    <div class="fail-quote" id="failQuoteTxt">"조금만 더 힘내면 성공할 수 있어요!"</div>
+
+    <div class="fail-card">
+      <div class="fail-score-now" id="failScoreSummary">
+        나의 기록: <strong>0점</strong>
+      </div>
+      <div class="fail-target-box" id="failTargetGuide">
+        🎯 미션 목표: 5,000점 이상 달성 시 1,000원 할인권 증정!
+      </div>
+    </div>
+
+    <button class="btn-retry-primary" onclick="startGame()">
+      🔄 다시하기 (바로 재도전!)
+    </button>
+    <div class="result-buttons">
+      <button class="btn-retry" onclick="backToIntro()">🎮 다른 게임 선택</button>
+      <a href="/boribap/" class="btn-go-menu">메뉴 보러가기 →</a>
+    </div>
+  </div>
+</div>
+
+<script>
+/* --- 1. Mode & Character Selection --- */
+let currentMode = 'catch'; // 'catch', 'mix', or 'sauce'
+let selectedChar = 'male';
+let introFrame = 1;
+
+setInterval(() => {
+  introFrame = introFrame === 1 ? 2 : 1;
+  const mPrev = document.getElementById('preview-male');
+  const fPrev = document.getElementById('preview-female');
+  if (mPrev) mPrev.src = `/img/game/male_run_${introFrame}.png`;
+  if (fPrev) fPrev.src = `/img/game/female_run_${introFrame}.png`;
+}, 280);
+
+function selectGameMode(mode) {
+  currentMode = mode;
+  document.getElementById('tab-catch').classList.toggle('active', mode === 'catch');
+  document.getElementById('tab-mix').classList.toggle('active', mode === 'mix');
+  document.getElementById('tab-sauce').classList.toggle('active', mode === 'sauce');
+
+  document.getElementById('guide-catch').style.display = mode === 'catch' ? 'flex' : 'none';
+  document.getElementById('guide-mix').style.display = mode === 'mix' ? 'flex' : 'none';
+  document.getElementById('guide-sauce').style.display = mode === 'sauce' ? 'flex' : 'none';
+
+  const pill = document.getElementById('rewardPillText');
+  const startBtn = document.getElementById('startBtnText');
+  if (mode === 'catch') {
+    pill.innerHTML = '🎁 20초 내 <strong>5,000점 이상</strong> 달성 시 <strong>1,000원 할인권 증정!</strong>';
+    startBtn.textContent = '양푼 들고 재료 받기 시작! 🥣';
+  } else if (mode === 'mix') {
+    pill.innerHTML = '🎁 10초 내 <strong>50회 이상</strong> 비비기 성공 시 <strong>1,000원 할인권 증정!</strong>';
+    startBtn.textContent = '10초 폭풍 비빔밥 비비기 시작! 🥄';
+  } else {
+    pill.innerHTML = '🎁 15초 내 <strong>황금소스 2그릇</strong> 완성 시 <strong>1,000원 할인권 증정!</strong>';
+    startBtn.textContent = '35년 비법! 황금비율 소스 만들기! 🌶️';
+  }
+  playSoundEffect('select');
+}
+
+function chooseCharacter(gender) {
+  selectedChar = gender;
+  document.getElementById('card-male').classList.toggle('active', gender === 'male');
+  document.getElementById('card-female').classList.toggle('active', gender === 'female');
+  playSoundEffect('select');
+}
+
+/* --- 2. Web Audio Synthesizer --- */
+let soundOn = true;
+let audioCtx = null;
+function ensureAudio() {
+  if (!audioCtx) {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (AudioContext) audioCtx = new AudioContext();
+  }
+  if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+}
+
+function playTone(freq, dur, type = 'sine', vol = 0.14, delay = 0) {
+  if (!soundOn) return;
+  ensureAudio();
+  if (!audioCtx) return;
+  try {
+    const start = audioCtx.currentTime + delay;
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, start);
+    gain.gain.setValueAtTime(vol, start);
+    gain.gain.exponentialRampToValueAtTime(0.001, start + dur);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start(start);
+    osc.stop(start + dur);
+  } catch (e) {}
+}
+
+function playSoundEffect(kind) {
+  if (!soundOn) return;
+  if (kind === 'select') {
+    playTone(523.25, 0.08, 'triangle', 0.12);
+  } else if (kind === 'good') {
+    playTone(659.25, 0.09, 'triangle', 0.15, 0);
+    playTone(880.0, 0.14, 'triangle', 0.15, 0.06);
+  } else if (kind === 'mix') {
+    const base = 420 + Math.min(500, mixCount * 8);
+    playTone(base, 0.06, 'triangle', 0.13, 0);
+  } else if (kind === 'sauce_step') {
+    const stepFreq = 480 + sauceStepIdx * 55;
+    playTone(stepFreq, 0.08, 'triangle', 0.15, 0);
+  } else if (kind === 'special') {
+    playTone(587.33, 0.08, 'sine', 0.16, 0);
+    playTone(880.0, 0.08, 'sine', 0.16, 0.06);
+    playTone(1174.66, 0.18, 'triangle', 0.18, 0.12);
+  } else if (kind === 'bad') {
+    playTone(190, 0.18, 'sawtooth', 0.15, 0);
+    playTone(145, 0.22, 'sawtooth', 0.15, 0.08);
+  } else if (kind === 'shuffle') {
+    [320, 420, 360, 480, 540].forEach((f, i) => {
+      playTone(f, 0.045, 'triangle', 0.1, i * 0.055);
+    });
+  } else if (kind === 'win') {
+    [523.25, 659.25, 783.99, 1046.5].forEach((f, i) => {
+      playTone(f, 0.25, 'triangle', 0.18, i * 0.11);
+    });
+  } else if (kind === 'fail') {
+    [392.0, 349.23, 329.63, 261.63].forEach((f, i) => {
+      playTone(f, 0.24, 'sawtooth', 0.13, i * 0.14);
+    });
+  }
+}
+
+document.getElementById('soundBtn').addEventListener('click', function() {
+  soundOn = !soundOn;
+  this.textContent = soundOn ? '🔊 효과음 ON' : '🔇 효과음 OFF';
+});
+
+/* --- 3. Character Expressions (Clean HD Cutout Face Stickers) --- */
+const faceMap = {
+  male: {
+    determined: '/img/game/male_face_determined.png?v=3',
+    happy: '/img/game/male_face_happy.png?v=3',
+    surprised: '/img/game/male_face_surprised.png?v=3',
+    touched: '/img/game/male_face_touched.png?v=3',
+    embarrassed: '/img/game/male_face_embarrassed.png?v=3',
+    sad: '/img/game/male_face_sad.png?v=3',
+  },
+  female: {
+    determined: '/img/game/female_face_determined.png?v=3',
+    happy: '/img/game/female_face_happy.png?v=3',
+    surprised: '/img/game/female_face_surprised.png?v=3',
+    touched: '/img/game/female_face_touched.png?v=3',
+    embarrassed: '/img/game/female_face_embarrassed.png?v=3',
+    sad: '/img/game/female_face_sad.png?v=3',
+  }
+};
+
+const linesMap = {
+  determined: ["파이팅! 다 챙겨야죠!", "오늘도 맛있는 하루!", "황금비율로 만들어보자!"],
+  happy: ["잘하고 있어, 우리! ♥", "바로 이 황금비율이지!", "손님들이 반하시겠어!"],
+  surprised: ["와아! 손놀림이 빛의 속도!", "35년 비법 마약소스 완성✨", "달인 등극!!"],
+  touched: ["맛있는 일상이 쌓여가는 중😭", "전설의 황금 손맛! 최고야 ♥"],
+  sad: ["앗! 조심조심💦", "정량을 확인해 주세요!", "다시 집중하자!"]
+};
+
+function updateHUDReaction(emotion) {
+  const faceImg = document.getElementById('hudFaceImg');
+  const faceBox = document.getElementById('hudFaceBox');
+  const bubble = document.getElementById('hudBubble');
+  faceImg.src = faceMap[selectedChar][emotion] || faceMap[selectedChar].happy;
+  const pool = linesMap[emotion] || linesMap.happy;
+  bubble.textContent = pool[Math.floor(Math.random() * pool.length)];
+  faceBox.classList.remove('pop');
+  void faceBox.offsetWidth;
+  faceBox.classList.add('pop');
+}
+
+/* --- 4. Preload All Sprites & Assets --- */
+const sprites = {
+  male: [new Image(), new Image()],
+  female: [new Image(), new Image()]
+};
+sprites.male[0].src = '/img/game/male_run_1.png';
+sprites.male[1].src = '/img/game/male_run_2.png';
+sprites.female[0].src = '/img/game/female_run_1.png';
+sprites.female[1].src = '/img/game/female_run_2.png';
+
+const itemDefs = [
+  { id: 'boribap', name: '보리밥', pts: 150, prob: 0.33, size: 58, speed: 220, src: '/img/game/item_boribap_hd.png', good: true },
+  { id: 'sanchae', name: '산채나물', pts: 200, prob: 0.24, size: 58, speed: 240, src: '/img/game/item_sanchae_hd.png', good: true },
+  { id: 'dakhanmari', name: '닭한마리', pts: 300, prob: 0.19, size: 64, speed: 255, src: '/img/game/item_dakhanmari_hd.png', good: true },
+  { id: 'sesame', name: '황금참기름', pts: 450, prob: 0.08, size: 56, speed: 290, src: '/img/game/item_sesame_hd.png', good: true, special: true },
+  { id: 'chicken', name: '행운꼬마닭', pts: 500, prob: 0.05, size: 60, speed: 305, src: '/img/game/item_chicken_hd.png', good: true, special: true },
+  { id: 'bad_chili', name: '탄 고추', pts: -150, prob: 0.11, size: 52, speed: 260, src: '/img/game/item_bad_chili_hd.png', good: false }
+];
+
+const itemImages = {};
+itemDefs.forEach(d => {
+  const im = new Image();
+  im.src = d.src;
+  itemImages[d.id] = im;
+});
+
+// Game 2 (Bibimbap Mix) Assets
+const mixStages = [new Image(), new Image(), new Image()];
+mixStages[0].src = '/img/game/bibimbap_stage_1.png';
+mixStages[1].src = '/img/game/bibimbap_stage_2.png';
+mixStages[2].src = '/img/game/bibimbap_stage_3.png';
+
+const spoonImg = new Image();
+spoonImg.src = '/img/game/bibimbap_spoon.png?v=3';
+
+// Game 3 (Golden Ratio Sauce) Assets
+const sauceIngDefs = [
+  { id: 'soy', name: '특제간장', target: 3, src: '/img/game/sauce_soy.png', color: '#5A321E' },
+  { id: 'dadaegi', name: '다대기', target: 1, src: '/img/game/sauce_dadaegi.png', color: '#D62818' },
+  { id: 'mustard', name: '겨자', target: 1, src: '/img/game/sauce_mustard.png', color: '#E09F1F' },
+  { id: 'cabbage', name: '양배추', target: 3, src: '/img/game/sauce_cabbage.png', color: '#5A9E38' },
+  { id: 'chives', name: '부추', target: 1, src: '/img/game/sauce_chives.png', color: '#2E7D32' }
+];
+const sauceIngImgs = {};
+sauceIngDefs.forEach(d => {
+  const im = new Image();
+  im.src = d.src;
+  sauceIngImgs[d.id] = im;
+});
+const sauceBowlImgs = {
+  empty: new Image(),
+  half: new Image(),
+  done: new Image()
+};
+sauceBowlImgs.empty.src = '/img/game/sauce_bowl_empty.png';
+sauceBowlImgs.half.src = '/img/game/sauce_bowl_half.png';
+sauceBowlImgs.done.src = '/img/game/sauce_bowl_done.png';
+
+/* --- 5. Main Game Engine & Mission Goals --- */
+let canvas, ctx;
+let isPlaying = false;
+let score = 0;
+let combo = 0;
+let maxCombo = 0;
+let timeLeft = 20;
+let countdownTimer = null;
+let spawnClock = 0;
+let shakeTime = 0;
+
+// Mission Thresholds
+const catchGoalScore = 5000; // Game 1: 5,000점 이상 성공 (미만 시 실패)
+let mixCount = 0;
+const mixGoal = 50;          // Game 2: 50회 이상 성공 (미만 시 실패)
+const sauceGoalBowls = 2;    // Game 3: 제한시간 내 2그릇 완성 성공 (미달성 시 실패)
+
+// Game 1 Player State
+const player = {
+  x: 160,
+  targetX: 160,
+  y: 360,
+  w: 88,
+  h: 148,
+  facingRight: false,
+  walkTimer: 0,
+  walkFrame: 0,
+  bounceScaleY: 1,
+  bounceScaleX: 1
+};
+
+// Game 2 Mix State
+let bowlAngle = 0;
+let bowlAngularVel = 0;
+let bowlScale = 1;
+let spoonAngle = 0;
+let spoonOffset = 0;
+let lastRubX = null;
+let lastRubY = null;
+let rubDistanceAcc = 0;
+
+// Game 3 Sauce State
+// Golden Ratio Recipe: 특제간장 3번, 다대기 1번, 겨자 1번, 양배추 3번, 부추 1번 (Total 9 taps per bowl)
+let sauceRecipe = [];
+let shuffledSauceCards = [];
+let sauceCardDealProgress = 1; // 0 -> 1 animation when cards stack in center, shuffle, and spread out
+let bowlAddedItems = [];
+let sauceStepIdx = 0;
+let sauceBowlsCompleted = 0;
+let sauceBowlScale = 1;
+let sauceDoneHoldTimer = 0;
+let sauceBtnRects = [];
+let flyingDrops = [];
+
+let fallingItems = [];
+let floatingTexts = [];
+let particles = [];
+
+function shuffleArray(arr) {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+function triggerSauceCardShuffle() {
+  shuffledSauceCards = shuffleArray(sauceIngDefs);
+  sauceCardDealProgress = 0;
+  playSoundEffect('shuffle');
+}
+
+function buildGoldenSauceRecipe() {
+  return [
+    { id: 'soy', name: '특제간장', target: 3, count: 0 },
+    { id: 'dadaegi', name: '다대기', target: 1, count: 0 },
+    { id: 'mustard', name: '겨자', target: 1, count: 0 },
+    { id: 'cabbage', name: '양배추', target: 3, count: 0 },
+    { id: 'chives', name: '부추', target: 1, count: 0 }
+  ];
+}
+
+function fitCanvas() {
+  const wrap = document.getElementById('canvas-wrap');
+  if (!wrap || !canvas) return;
+  canvas.width = wrap.clientWidth;
+  canvas.height = wrap.clientHeight;
+  player.y = canvas.height - player.h - 14;
+}
+window.addEventListener('resize', fitCanvas);
+
+function startGame() {
+  ensureAudio();
+  playSoundEffect('select');
+
+  document.getElementById('screen-intro').style.display = 'none';
+  document.getElementById('screen-result').style.display = 'none';
+  document.getElementById('screen-fail').style.display = 'none';
+  document.getElementById('screen-game').style.display = 'flex';
+
+  canvas = document.getElementById('gameCanvas');
+  ctx = canvas.getContext('2d');
+  fitCanvas();
+
+  score = 0;
+  combo = 0;
+  maxCombo = 0;
+  mixCount = 0;
+  bowlAngle = 0;
+  bowlAngularVel = 0;
+  bowlScale = 1;
+  sauceRecipe = buildGoldenSauceRecipe();
+  bowlAddedItems = [];
+  sauceStepIdx = 0;
+  sauceBowlsCompleted = 0;
+  sauceBowlScale = 1;
+  sauceDoneHoldTimer = 0;
+  flyingDrops = [];
+  fallingItems = [];
+  floatingTexts = [];
+  particles = [];
+  spawnClock = 0;
+
+  if (currentMode === 'sauce') {
+    triggerSauceCardShuffle();
+  } else {
+    shuffledSauceCards = [...sauceIngDefs];
+    sauceCardDealProgress = 1;
+  }
+
+  timeLeft = currentMode === 'catch' ? 20 : (currentMode === 'mix' ? 10 : 15);
+
+  player.x = (canvas.width - player.w) / 2;
+  player.targetX = player.x;
+
+  const timeEl = document.getElementById('hudTime');
+  timeEl.textContent = timeLeft;
+  timeEl.classList.remove('timer-urgent');
+
+  const scoreLabel = document.getElementById('hudScoreLabel');
+  const guideEl = document.getElementById('dragGuide');
+  guideEl.style.opacity = '1';
+
+  if (currentMode === 'catch') {
+    scoreLabel.textContent = '목표 5,000점';
+    document.getElementById('hudScore').textContent = '0';
+    guideEl.textContent = '👈 좌우로 드래그하여 5,000점 이상 재료를 담으세요! 👉';
+    setupCatchControls();
+  } else if (currentMode === 'mix') {
+    scoreLabel.textContent = '목표 50회';
+    document.getElementById('hudScore').textContent = '0 / 50회';
+    guideEl.textContent = '👆 10초 안에 50회 이상 빠르게 연타하거나 문지르세요! 🥄';
+    setupMixControls();
+  } else {
+    scoreLabel.textContent = '미션 2그릇';
+    document.getElementById('hudScore').textContent = `0 / ${sauceGoalBowls}그릇`;
+    guideEl.textContent = '👇 카드가 섞여 펼쳐지면 정량에 맞게 터치해 2그릇을 완성하세요! 🌶️';
+    setupSauceControls();
+  }
+
+  updateHUDReaction('determined');
+
+  isPlaying = true;
+  lastFrameTime = performance.now();
+  requestAnimationFrame(loop);
+
+  clearInterval(countdownTimer);
+  countdownTimer = setInterval(() => {
+    if (!isPlaying) return;
+    timeLeft--;
+    timeEl.textContent = timeLeft;
+    if (currentMode === 'catch' && timeLeft === 17) {
+      guideEl.style.opacity = '0';
+    }
+    if (timeLeft <= 4) {
+      timeEl.classList.add('timer-urgent');
+    }
+    if (timeLeft <= 0) {
+      finishGame();
+    }
+  }, 1000);
+}
+
+function setupCatchControls() {
+  canvas.onpointerdown = null;
+  canvas.onpointermove = null;
+  window.onkeydown = null;
+
+  function moveTarget(clientX) {
+    const rect = canvas.getBoundingClientRect();
+    const relX = clientX - rect.left;
+    const nextX = Math.max(4, Math.min(canvas.width - player.w - 4, relX - player.w / 2));
+    if (nextX > player.targetX + 2) player.facingRight = true;
+    else if (nextX < player.targetX - 2) player.facingRight = false;
+    player.targetX = nextX;
+  }
+
+  canvas.onpointerdown = (e) => { moveTarget(e.clientX); };
+  canvas.onpointermove = (e) => {
+    if (e.buttons > 0 || e.pointerType === 'touch' || e.pointerType === 'mouse') {
+      moveTarget(e.clientX);
+    }
+  };
+
+  window.onkeydown = (e) => {
+    if (!isPlaying || currentMode !== 'catch') return;
+    if (e.key === 'ArrowLeft') {
+      player.facingRight = false;
+      player.targetX = Math.max(4, player.targetX - 42);
+    } else if (e.key === 'ArrowRight') {
+      player.facingRight = true;
+      player.targetX = Math.min(canvas.width - player.w - 4, player.targetX + 42);
+    }
+  };
+}
+
+function triggerMixStroke(x, y) {
+  if (!isPlaying || currentMode !== 'mix') return;
+  mixCount++;
+  score = mixCount * 100;
+  document.getElementById('hudScore').textContent = `${mixCount} / ${mixGoal}회`;
+
+  bowlAngularVel = Math.min(18, bowlAngularVel + 3.2);
+  bowlScale = 1.11;
+  spoonAngle = (mixCount % 2 === 0 ? 1 : -1) * 0.28;
+  spoonOffset = (mixCount % 2 === 0 ? -18 : 18);
+  player.walkFrame = player.walkFrame === 0 ? 1 : 0;
+  player.bounceScaleX = 1.12;
+  player.bounceScaleY = 0.9;
+
+  playSoundEffect(mixCount === Math.floor(mixGoal * 0.5) || mixCount === mixGoal ? 'special' : 'mix');
+  createBurst(x, y, true);
+
+  const praiseWords = ['쓱싹!', '비벼비벼!', '고소해~✨', '참기름향♥', '맛있어져라!'];
+  const word = mixCount === mixGoal ? '🎉 50회 미션 달성!!' : praiseWords[mixCount % praiseWords.length];
+  floatingTexts.push({
+    x: x + (Math.random() - 0.5) * 40,
+    y: y - 20,
+    text: word,
+    color: mixCount >= mixGoal ? '#D93800' : '#2B7A2E',
+    life: 0.65
+  });
+
+  if (mixCount === Math.floor(mixGoal * 0.5)) {
+    updateHUDReaction('happy');
+  } else if (mixCount === Math.floor(mixGoal * 0.8)) {
+    updateHUDReaction('surprised');
+  } else if (mixCount === mixGoal) {
+    updateHUDReaction('touched');
+  }
+}
+
+function setupMixControls() {
+  canvas.onpointerdown = null;
+  canvas.onpointermove = null;
+  window.onkeydown = null;
+
+  canvas.onpointerdown = (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const rx = e.clientX - rect.left;
+    const ry = e.clientY - rect.top;
+    lastRubX = rx;
+    lastRubY = ry;
+    triggerMixStroke(rx, ry);
+  };
+
+  canvas.onpointermove = (e) => {
+    if (e.buttons <= 0 && e.pointerType === 'mouse') return;
+    const rect = canvas.getBoundingClientRect();
+    const rx = e.clientX - rect.left;
+    const ry = e.clientY - rect.top;
+    if (lastRubX !== null && lastRubY !== null) {
+      const dist = Math.hypot(rx - lastRubX, ry - lastRubY);
+      rubDistanceAcc += dist;
+      if (rubDistanceAcc > 58) {
+        rubDistanceAcc = 0;
+        triggerMixStroke(rx, ry);
+      }
+    }
+    lastRubX = rx;
+    lastRubY = ry;
+  };
+
+  window.onkeydown = (e) => {
+    if (!isPlaying || currentMode !== 'mix') return;
+    if (e.key === ' ' || e.key === 'Enter' || e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+      e.preventDefault();
+      triggerMixStroke(canvas.width / 2, canvas.height * 0.46);
+    }
+  };
+}
+
+/* --- Game 3: Golden Ratio Sauce Controls & Logic --- */
+function handleSauceIngredientTap(ingId, tapX, tapY) {
+  if (!isPlaying || currentMode !== 'sauce' || sauceDoneHoldTimer > 0 || sauceCardDealProgress < 0.85) return;
+
+  const targetEntry = sauceRecipe.find(g => g.id === ingId);
+  if (!targetEntry) return;
+
+  const bowlCenterX = canvas.width / 2;
+  const bowlCenterY = canvas.height * 0.43;
+
+  // Check if this ingredient still needs more taps
+  if (targetEntry.count < targetEntry.target) {
+    targetEntry.count++;
+    sauceStepIdx++;
+    score += 150;
+    sauceBowlScale = 1.13;
+    player.walkFrame = player.walkFrame === 0 ? 1 : 0;
+    player.bounceScaleX = 1.14;
+    player.bounceScaleY = 0.88;
+
+    // Record exact added ingredient instance with a slight organic offset/angle inside the bowl
+    const ringRadius = ingId === 'soy' ? 0 : (10 + Math.random() * 28);
+    const randAng = Math.random() * Math.PI * 2;
+    bowlAddedItems.push({
+      id: ingId,
+      stepCount: targetEntry.count,
+      ox: Math.cos(randAng) * ringRadius,
+      oy: Math.sin(randAng) * ringRadius,
+      rot: (Math.random() - 0.5) * 0.9
+    });
+
+    // Launch flying ingredient icon into the central dipping bowl
+    flyingDrops.push({
+      id: ingId,
+      x: tapX,
+      y: tapY,
+      tx: bowlCenterX + (Math.random() - 0.5) * 26,
+      ty: bowlCenterY + (Math.random() - 0.5) * 20,
+      progress: 0
+    });
+
+    createBurst(bowlCenterX, bowlCenterY, true);
+
+    // Check if all 5 ingredients have reached their exact target counts
+    const remaining = sauceRecipe.some(g => g.count < g.target);
+    if (!remaining) {
+      sauceBowlsCompleted++;
+      score += 500;
+      sauceDoneHoldTimer = 0.55;
+      document.getElementById('hudScore').textContent = `${sauceBowlsCompleted} / ${sauceGoalBowls}그릇`;
+      playSoundEffect('special');
+      updateHUDReaction(sauceBowlsCompleted >= sauceGoalBowls ? 'touched' : 'surprised');
+
+      const clearText = sauceBowlsCompleted >= sauceGoalBowls
+        ? `🎉 황금소스 ${sauceBowlsCompleted}그릇 미션 성공!!`
+        : `✨ 황금비율 ${sauceBowlsCompleted}그릇 완성! (${sauceGoalBowls - sauceBowlsCompleted}그릇 남음)`;
+      floatingTexts.push({
+        x: bowlCenterX,
+        y: bowlCenterY - 40,
+        text: clearText,
+        color: '#D93800',
+        life: 1.0
+      });
+
+      // Reset bowl to empty and shuffle/deal cards anew for the next bowl
+      setTimeout(() => {
+        if (!isPlaying || currentMode !== 'sauce') return;
+        sauceRecipe = buildGoldenSauceRecipe();
+        bowlAddedItems = [];
+        sauceStepIdx = 0;
+        triggerSauceCardShuffle();
+      }, 520);
+    } else {
+      playSoundEffect('sauce_step');
+      updateHUDReaction('happy');
+      floatingTexts.push({
+        x: tapX,
+        y: tapY - 24,
+        text: `${targetEntry.name} +1 (${targetEntry.count}/${targetEntry.target})`,
+        color: '#2B7A2E',
+        life: 0.65
+      });
+    }
+  } else {
+    // Player tapped an ingredient that is already full (count === target)!
+    shakeTime = 0.24;
+    score = Math.max(0, score - 50);
+    playSoundEffect('bad');
+    updateHUDReaction('sad');
+    floatingTexts.push({
+      x: tapX,
+      y: tapY - 24,
+      text: `앗! [${targetEntry.name}] 정량 초과! (-50)`,
+      color: '#D62818',
+      life: 0.8
+    });
+  }
+}
+
+function setupSauceControls() {
+  canvas.onpointerdown = null;
+  canvas.onpointermove = null;
+  window.onkeydown = null;
+
+  canvas.onpointerdown = (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const rx = e.clientX - rect.left;
+    const ry = e.clientY - rect.top;
+
+    for (const btn of sauceBtnRects) {
+      if (rx >= btn.x && rx <= btn.x + btn.w && ry >= btn.y && ry <= btn.y + btn.h) {
+        handleSauceIngredientTap(btn.id, btn.x + btn.w / 2, btn.y + btn.h / 2);
+        return;
+      }
+    }
+  };
+
+  window.onkeydown = (e) => {
+    if (!isPlaying || currentMode !== 'sauce') return;
+    const idx = parseInt(e.key, 10) - 1;
+    if (idx >= 0 && idx < 5 && sauceBtnRects[idx]) {
+      const btn = sauceBtnRects[idx];
+      handleSauceIngredientTap(btn.id, btn.x + btn.w / 2, btn.y + btn.h / 2);
+    }
+  };
+}
+
+let lastFrameTime = 0;
+function loop(now) {
+  if (!isPlaying) return;
+  const dt = Math.min(0.05, (now - lastFrameTime) / 1000);
+  lastFrameTime = now;
+
+  if (currentMode === 'catch') {
+    updateCatch(dt);
+    drawCatch();
+  } else if (currentMode === 'mix') {
+    updateMix(dt);
+    drawMix();
+  } else {
+    updateSauce(dt);
+    drawSauce();
+  }
+
+  requestAnimationFrame(loop);
+}
+
+function pickRandomItemDef() {
+  const r = Math.random();
+  let acc = 0;
+  for (const d of itemDefs) {
+    acc += d.prob;
+    if (r <= acc) return d;
+  }
+  return itemDefs[0];
+}
+
+function spawnFallingItem() {
+  const def = pickRandomItemDef();
+  const margin = 16;
+  const x = margin + Math.random() * Math.max(20, canvas.width - def.size - margin * 2);
+  fallingItems.push({
+    def: def,
+    x: x,
+    y: -def.size - 10,
+    size: def.size,
+    vy: def.speed * (0.92 + Math.random() * 0.25),
+    angle: (Math.random() - 0.5) * 0.25,
+    va: (Math.random() - 0.5) * 1.8,
+    wobblePhase: Math.random() * Math.PI * 2
+  });
+}
+
+function createBurst(x, y, isGood) {
+  const colors = isGood
+    ? ['#FF6B2B', '#FFB800', '#58B348', '#FFF275']
+    : ['#555555', '#883322', '#222222'];
+  for (let i = 0; i < 9; i++) {
+    const ang = (Math.PI * 2 * i) / 9 + Math.random() * 0.3;
+    const spd = 65 + Math.random() * 110;
+    particles.push({
+      x: x,
+      y: y,
+      vx: Math.cos(ang) * spd,
+      vy: Math.sin(ang) * spd - 30,
+      r: 3 + Math.random() * 4,
+      color: colors[i % colors.length],
+      life: 0.42,
+      maxLife: 0.42
+    });
+  }
+}
+
+function updateCatch(dt) {
+  const dx = player.targetX - player.x;
+  player.x += dx * Math.min(1, dt * 15);
+
+  const isMoving = Math.abs(dx) > 3;
+  player.walkTimer += dt * (isMoving ? 8.5 : 3.2);
+  if (player.walkTimer >= 1) {
+    player.walkTimer = 0;
+    player.walkFrame = player.walkFrame === 0 ? 1 : 0;
+  }
+
+  player.bounceScaleX += (1 - player.bounceScaleX) * dt * 12;
+  player.bounceScaleY += (1 - player.bounceScaleY) * dt * 12;
+
+  if (shakeTime > 0) shakeTime -= dt;
+
+  const spawnInterval = timeLeft < 8 ? 0.28 : 0.36;
+  spawnClock += dt;
+  if (spawnClock >= spawnInterval) {
+    spawnClock = 0;
+    spawnFallingItem();
+  }
+
+  const catchBox = {
+    x: player.x + 8,
+    y: player.y + 32,
+    w: player.w - 16,
+    h: 58
+  };
+
+  for (let i = fallingItems.length - 1; i >= 0; i--) {
+    const it = fallingItems[i];
+    it.y += it.vy * dt;
+    it.angle += it.va * dt;
+    it.wobblePhase += dt * 4;
+    it.x += Math.sin(it.wobblePhase) * 0.4;
+
+    const itemCenterX = it.x + it.size / 2;
+    const itemCenterY = it.y + it.size / 2;
+
+    if (
+      itemCenterX >= catchBox.x &&
+      itemCenterX <= catchBox.x + catchBox.w &&
+      itemCenterY >= catchBox.y &&
+      itemCenterY <= catchBox.y + catchBox.h
+    ) {
+      if (it.def.good) {
+        combo++;
+        if (combo > maxCombo) maxCombo = combo;
+        const bonus = combo >= 3 ? 80 : 0;
+        const gained = it.def.pts + bonus;
+        score += gained;
+
+        player.bounceScaleX = 1.14;
+        player.bounceScaleY = 0.88;
+
+        playSoundEffect(it.def.special ? 'special' : 'good');
+        createBurst(itemCenterX, itemCenterY, true);
+
+        floatingTexts.push({
+          x: itemCenterX,
+          y: catchBox.y - 6,
+          text: combo >= 3 ? `${it.def.name} +${gained} (${combo}콤보🔥)` : `+${gained}`,
+          color: it.def.special ? '#D93800' : '#2B7A2E',
+          life: 0.75
+        });
+
+        if (score >= catchGoalScore) updateHUDReaction('touched');
+        else if (it.def.special || combo >= 4) updateHUDReaction('surprised');
+        else updateHUDReaction('happy');
+      } else {
+        combo = 0;
+        score = Math.max(0, score + it.def.pts);
+        shakeTime = 0.25;
+        player.bounceScaleX = 0.88;
+        player.bounceScaleY = 1.12;
+
+        playSoundEffect('bad');
+        createBurst(itemCenterX, itemCenterY, false);
+
+        floatingTexts.push({
+          x: itemCenterX,
+          y: catchBox.y - 6,
+          text: `앗! 탄 고추 ${it.def.pts}`,
+          color: '#555555',
+          life: 0.75
+        });
+        updateHUDReaction('sad');
+      }
+
+      document.getElementById('hudScore').textContent = score.toLocaleString();
+      fallingItems.splice(i, 1);
+      continue;
+    }
+
+    if (it.y > canvas.height + 60) {
+      fallingItems.splice(i, 1);
+    }
+  }
+
+  updateParticlesAndTexts(dt);
+}
+
+function updateMix(dt) {
+  bowlAngle += bowlAngularVel * dt;
+  bowlAngularVel *= Math.pow(0.08, dt);
+  bowlScale += (1 - bowlScale) * dt * 14;
+  spoonAngle += (0 - spoonAngle) * dt * 10;
+  spoonOffset += (0 - spoonOffset) * dt * 10;
+  player.bounceScaleX += (1 - player.bounceScaleX) * dt * 12;
+  player.bounceScaleY += (1 - player.bounceScaleY) * dt * 12;
+
+  updateParticlesAndTexts(dt);
+}
+
+function updateSauce(dt) {
+  if (shakeTime > 0) shakeTime -= dt;
+  if (sauceDoneHoldTimer > 0) sauceDoneHoldTimer -= dt;
+  if (sauceCardDealProgress < 1) {
+    sauceCardDealProgress = Math.min(1, sauceCardDealProgress + dt * 1.55);
+  }
+  sauceBowlScale += (1 - sauceBowlScale) * dt * 14;
+  player.bounceScaleX += (1 - player.bounceScaleX) * dt * 12;
+  player.bounceScaleY += (1 - player.bounceScaleY) * dt * 12;
+
+  for (let i = flyingDrops.length - 1; i >= 0; i--) {
+    const fd = flyingDrops[i];
+    fd.progress += dt * 5.5;
+    if (fd.progress >= 1) {
+      flyingDrops.splice(i, 1);
+    }
+  }
+
+  updateParticlesAndTexts(dt);
+}
+
+function updateParticlesAndTexts(dt) {
+  for (let i = particles.length - 1; i >= 0; i--) {
+    const p = particles[i];
+    p.x += p.vx * dt;
+    p.y += p.vy * dt;
+    p.vy += 260 * dt;
+    p.life -= dt;
+    if (p.life <= 0) particles.splice(i, 1);
+  }
+
+  for (let i = floatingTexts.length - 1; i >= 0; i--) {
+    const ft = floatingTexts[i];
+    ft.y -= 48 * dt;
+    ft.life -= dt;
+    if (ft.life <= 0) floatingTexts.splice(i, 1);
+  }
+}
+
+function drawCatch() {
+  ctx.save();
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  if (shakeTime > 0) {
+    ctx.translate((Math.random() - 0.5) * 10, (Math.random() - 0.5) * 8);
+  }
+
+  // Top Mission Progress Bar (5,000 pts goal)
+  const cx = canvas.width / 2;
+  const barW = Math.min(320, canvas.width - 40);
+  const barH = 20;
+  const barX = cx - barW / 2;
+  const barY = 14;
+  const catchPct = Math.min(100, Math.round((score / catchGoalScore) * 100));
+
+  ctx.fillStyle = 'rgba(255, 253, 248, 0.92)';
+  ctx.strokeStyle = '#6E4A35';
+  ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  ctx.roundRect(barX, barY, barW, barH, 10);
+  ctx.fill();
+  ctx.stroke();
+
+  if (catchPct > 0) {
+    ctx.fillStyle = score >= catchGoalScore ? '#3B843E' : '#E65525';
+    ctx.beginPath();
+    ctx.roundRect(barX + 3, barY + 3, Math.max(10, ((barW - 6) * catchPct) / 100), barH - 6, 7);
+    ctx.fill();
+  }
+
+  ctx.font = '900 11.5px Pretendard, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#3E271C';
+  ctx.fillText(
+    score >= catchGoalScore
+      ? `🎉 5,000점 미션 달성 완료! (${score.toLocaleString()}점)`
+      : `🎯 미션 목표: ${score.toLocaleString()} / 5,000점 (${catchPct}%)`,
+    cx,
+    barY + 35
+  );
+
+  ctx.fillStyle = 'rgba(62, 39, 28, 0.18)';
+  ctx.beginPath();
+  ctx.ellipse(player.x + player.w / 2, player.y + player.h - 6, player.w * 0.36, 10, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  const charFrames = sprites[selectedChar];
+  const currentSprite = charFrames[player.walkFrame];
+  if (currentSprite && currentSprite.complete && currentSprite.naturalHeight > 0) {
+    ctx.save();
+    const px = player.x + player.w / 2;
+    const py = player.y + player.h;
+    ctx.translate(px, py);
+    const dirX = player.facingRight ? -1 : 1;
+    ctx.scale(dirX * player.bounceScaleX, player.bounceScaleY);
+    const ratio = currentSprite.naturalWidth / currentSprite.naturalHeight;
+    const drawH = player.h;
+    const drawW = drawH * ratio;
+    ctx.drawImage(currentSprite, -drawW / 2, -drawH, drawW, drawH);
+    ctx.restore();
+  }
+
+  for (const it of fallingItems) {
+    const im = itemImages[it.def.id];
+    ctx.save();
+    ctx.translate(it.x + it.size / 2, it.y + it.size / 2);
+    ctx.rotate(it.angle);
+    if (im && im.complete && im.naturalHeight > 0) {
+      const iratio = im.naturalWidth / im.naturalHeight;
+      const iw = iratio >= 1 ? it.size : it.size * iratio;
+      const ih = iratio >= 1 ? it.size / iratio : it.size;
+      ctx.drawImage(im, -iw / 2, -ih / 2, iw, ih);
+    }
+    ctx.restore();
+  }
+
+  drawParticlesAndTexts();
+  ctx.restore();
+}
+
+function drawMix() {
+  ctx.save();
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  const cx = canvas.width / 2;
+  const cy = canvas.height * 0.45;
+  const pct = Math.min(100, Math.round((mixCount / mixGoal) * 100));
+
+  const barW = Math.min(320, canvas.width - 48);
+  const barH = 22;
+  const barX = cx - barW / 2;
+  const barY = 20;
+
+  ctx.fillStyle = 'rgba(255, 253, 248, 0.92)';
+  ctx.strokeStyle = '#6E4A35';
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.roundRect(barX, barY, barW, barH, 11);
+  ctx.fill();
+  ctx.stroke();
+
+  if (pct > 0) {
+    const grad = ctx.createLinearGradient(barX, 0, barX + barW, 0);
+    grad.addColorStop(0, '#FFB800');
+    grad.addColorStop(1, mixCount >= mixGoal ? '#3B843E' : '#E65525');
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.roundRect(barX + 3, barY + 3, Math.max(12, ((barW - 6) * pct) / 100), barH - 6, 8);
+    ctx.fill();
+  }
+
+  ctx.font = '900 13px Pretendard, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#3E271C';
+  const stageTitle = mixCount >= mixGoal
+    ? `✨ 50회 비비기 미션 성공! (현재 ${mixCount}회) ✨`
+    : `🎯 미션 목표: ${mixCount} / ${mixGoal}회 비비기 (${pct}%)`;
+  ctx.fillText(stageTitle, cx, barY + 38);
+
+  const charFrames = sprites[selectedChar];
+  const currentSprite = charFrames[player.walkFrame];
+  if (currentSprite && currentSprite.complete && currentSprite.naturalHeight > 0) {
+    ctx.save();
+    const ratio = currentSprite.naturalWidth / currentSprite.naturalHeight;
+    const chH = 120;
+    const chW = chH * ratio;
+    ctx.translate(cx + 115, cy - 85);
+    ctx.scale(player.bounceScaleX, player.bounceScaleY);
+    ctx.drawImage(currentSprite, -chW / 2, -chH / 2, chW, chH);
+    ctx.restore();
+  }
+
+  let stageIdx = 0;
+  if (pct >= 100) stageIdx = 2;
+  else if (pct >= 50) stageIdx = 1;
+  const bowlImg = mixStages[stageIdx];
+
+  const bowlSize = Math.min(250, canvas.width * 0.64);
+  ctx.fillStyle = 'rgba(62, 39, 28, 0.22)';
+  ctx.beginPath();
+  ctx.ellipse(cx, cy + bowlSize * 0.44, bowlSize * 0.46, 18, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  if (bowlImg && bowlImg.complete && bowlImg.naturalHeight > 0) {
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.scale(bowlScale, bowlScale);
+    ctx.rotate(bowlAngle);
+    const bratio = bowlImg.naturalWidth / bowlImg.naturalHeight;
+    const bw = bowlSize * bratio;
+    const bh = bowlSize;
+    ctx.drawImage(bowlImg, -bw / 2, -bh / 2, bw, bh);
+    ctx.restore();
+  }
+
+  if (spoonImg && spoonImg.complete && spoonImg.naturalHeight > 0) {
+    ctx.save();
+    ctx.translate(cx + 42 + spoonOffset, cy - 28 - spoonOffset * 0.5);
+    ctx.rotate(spoonAngle);
+    const sratio = spoonImg.naturalWidth / spoonImg.naturalHeight;
+    const sh = 145;
+    const sw = sh * sratio;
+    ctx.drawImage(spoonImg, -sw / 2, -sh / 2, sw, sh);
+    ctx.restore();
+  }
+
+  drawParticlesAndTexts();
+  ctx.restore();
+}
+
+function drawSauce() {
+  ctx.save();
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  if (shakeTime > 0) {
+    ctx.translate((Math.random() - 0.5) * 10, (Math.random() - 0.5) * 8);
+  }
+
+  const cx = canvas.width / 2;
+
+  // 1. Draw Top Recipe Banner ("오늘의 35년 비법 황금레시피")
+  const recW = Math.min(440, canvas.width - 20);
+  const recH = 84;
+  const recX = cx - recW / 2;
+  const recY = 12;
+
+  ctx.fillStyle = 'rgba(255, 252, 245, 0.96)';
+  ctx.strokeStyle = '#6E4A35';
+  ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  ctx.roundRect(recX, recY, recW, recH, 16);
+  ctx.fill();
+  ctx.stroke();
+
+  ctx.font = '900 12.5px Pretendard, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillStyle = sauceBowlsCompleted >= sauceGoalBowls ? '#2E7D32' : '#D94111';
+  const missionHeader = sauceBowlsCompleted >= sauceGoalBowls
+    ? `🎉 2그릇 미션 성공! (현재 ${sauceBowlsCompleted}그릇 · 보너스 도전!)`
+    : `📜 황금레시피 미션 (${sauceBowlsCompleted}/${sauceGoalBowls}그릇 완료 · 시간 내 2그릇!)`;
+  ctx.fillText(missionHeader, cx, recY + 19);
+
+  // Draw 5 recipe steps horizontally inside banner
+  const stepW = (recW - 16) / 5;
+  sauceRecipe.forEach((step, idx) => {
+    const sx = recX + 8 + idx * stepW + stepW / 2;
+    const sy = recY + 53;
+    const isDone = step.count >= step.target;
+
+    ctx.save();
+    ctx.fillStyle = isDone ? '#E8F5E9' : '#FFF7EB';
+    ctx.strokeStyle = isDone ? '#3B843E' : '#E65525';
+    ctx.lineWidth = isDone ? 1.5 : 2;
+    ctx.beginPath();
+    ctx.roundRect(sx - stepW * 0.45, sy - 22, stepW * 0.9, 42, 10);
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.font = '800 11px Pretendard, sans-serif';
+    ctx.fillStyle = '#3E271C';
+    ctx.fillText(step.name, sx, sy - 5);
+
+    ctx.font = '900 12px Pretendard, sans-serif';
+    ctx.fillStyle = isDone ? '#2E7D32' : '#D93800';
+    ctx.fillText(isDone ? '완료✓' : `${step.count}/${step.target}번`, sx, sy + 12);
+    ctx.restore();
+  });
+
+  // 2. Draw Central Sauce Dipping Dish & Cheering Owner
+  const bowlY = canvas.height * 0.43;
+  const bowlSize = Math.min(190, canvas.width * 0.47);
+
+  // Cheering character next to sauce dish
+  const charFrames = sprites[selectedChar];
+  const currentSprite = charFrames[player.walkFrame];
+  if (currentSprite && currentSprite.complete && currentSprite.naturalHeight > 0) {
+    ctx.save();
+    const ratio = currentSprite.naturalWidth / currentSprite.naturalHeight;
+    const chH = 115;
+    const chW = chH * ratio;
+    ctx.translate(cx + bowlSize * 0.58, bowlY - 12);
+    ctx.scale(player.bounceScaleX, player.bounceScaleY);
+    ctx.drawImage(currentSprite, -chW / 2, -chH / 2, chW, chH);
+    ctx.restore();
+  }
+
+  // Shadow under sauce dish
+  ctx.fillStyle = 'rgba(62, 39, 28, 0.2)';
+  ctx.beginPath();
+  ctx.ellipse(cx, bowlY + bowlSize * 0.44, bowlSize * 0.46, 15, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Draw the Bowl & ONLY the exact ingredients that have been added so far!
+  ctx.save();
+  ctx.translate(cx, bowlY);
+  ctx.scale(sauceBowlScale, sauceBowlScale);
+
+  if (sauceDoneHoldTimer > 0 && sauceBowlImgs.done.complete && sauceBowlImgs.done.naturalHeight > 0) {
+    const bratio = sauceBowlImgs.done.naturalWidth / sauceBowlImgs.done.naturalHeight;
+    ctx.drawImage(sauceBowlImgs.done, (-bowlSize * bratio) / 2, -bowlSize / 2, bowlSize * bratio, bowlSize);
+  } else {
+    // 2a. Base Empty Ceramic Bowl
+    const emptyIm = sauceBowlImgs.empty;
+    if (emptyIm && emptyIm.complete && emptyIm.naturalHeight > 0) {
+      const bratio = emptyIm.naturalWidth / emptyIm.naturalHeight;
+      ctx.drawImage(emptyIm, (-bowlSize * bratio) / 2, -bowlSize / 2, bowlSize * bratio, bowlSize);
+    }
+
+    // 2b. Soy Sauce Liquid Level (ONLY if soy count > 0: grows with 1, 2, 3 taps)
+    const soyEntry = sauceRecipe.find(g => g.id === 'soy');
+    const soyCount = soyEntry ? soyEntry.count : 0;
+    if (soyCount > 0) {
+      const maxInnerR = bowlSize * 0.34;
+      const curR = maxInnerR * (0.55 + (soyCount / 3) * 0.45);
+      const soyGrad = ctx.createRadialGradient(-curR * 0.2, -curR * 0.2, curR * 0.1, 0, 0, curR);
+      soyGrad.addColorStop(0, `rgba(92, 42, 18, ${0.55 + soyCount * 0.13})`);
+      soyGrad.addColorStop(0.75, `rgba(52, 20, 8, ${0.65 + soyCount * 0.11})`);
+      soyGrad.addColorStop(1, 'rgba(38, 14, 5, 0.85)');
+      ctx.fillStyle = soyGrad;
+      ctx.beginPath();
+      ctx.arc(0, 0, curR, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Subtle glossy highlight on soy sauce surface
+      ctx.strokeStyle = 'rgba(255, 235, 205, 0.38)';
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      ctx.arc(0, 0, curR * 0.78, -Math.PI * 0.75, -Math.PI * 0.25);
+      ctx.stroke();
+    }
+
+    // 2c. Layer ONLY the non-soy ingredients that the user has actually tapped into the bowl!
+    for (const item of bowlAddedItems) {
+      if (item.id === 'soy') continue;
+      ctx.save();
+      ctx.translate(item.ox, item.oy);
+      ctx.rotate(item.rot);
+
+      if (item.id === 'cabbage') {
+        const cabIm = sauceIngImgs.cabbage;
+        if (cabIm && cabIm.complete) {
+          const sz = bowlSize * 0.34;
+          const r = cabIm.naturalWidth / cabIm.naturalHeight;
+          ctx.drawImage(cabIm, (-sz * r) / 2, -sz / 2, sz * r, sz);
+        }
+      } else if (item.id === 'dadaegi') {
+        const dGrad = ctx.createRadialGradient(-3, -3, 2, 0, 0, bowlSize * 0.13);
+        dGrad.addColorStop(0, '#E63926');
+        dGrad.addColorStop(1, '#9E1B0E');
+        ctx.fillStyle = dGrad;
+        ctx.beginPath();
+        ctx.arc(0, 0, bowlSize * 0.12, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#FFE082';
+        for (let s = 0; s < 5; s++) {
+          ctx.beginPath();
+          ctx.arc((s - 2) * 4, (s % 2 === 0 ? -3 : 4), 1.5, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      } else if (item.id === 'mustard') {
+        ctx.strokeStyle = '#F4B41A';
+        ctx.lineWidth = 7;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(-14, -4);
+        ctx.quadraticCurveTo(-4, -14, 4, 0);
+        ctx.quadraticCurveTo(12, 12, 18, -2);
+        ctx.stroke();
+      } else if (item.id === 'chives') {
+        const chvIm = sauceIngImgs.chives;
+        if (chvIm && chvIm.complete) {
+          const sz = bowlSize * 0.3;
+          const r = chvIm.naturalWidth / chvIm.naturalHeight;
+          ctx.drawImage(chvIm, (-sz * r) / 2, -sz / 2, sz * r, sz);
+        }
+      }
+      ctx.restore();
+    }
+  }
+  ctx.restore();
+
+  // Status text below the bowl
+  const totalAdded = sauceRecipe.reduce((acc, g) => acc + g.count, 0);
+  ctx.save();
+  ctx.font = '900 14.5px Pretendard, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.lineWidth = 4;
+  ctx.strokeStyle = '#FFFFFF';
+  let statusMsg = '';
+  if (sauceCardDealProgress < 0.85) {
+    statusMsg = '🔀 재료 카드를 랜덤하게 섞어 배치하는 중...';
+  } else if (totalAdded === 0) {
+    statusMsg = '빈 종지입니다! 섞인 카드 위치를 보고 재료를 채워주세요';
+  } else {
+    statusMsg = `현재 종지 배합 진행도: ${totalAdded} / 9 완료 (${sauceBowlsCompleted}/${sauceGoalBowls}그릇)`;
+  }
+  ctx.strokeText(statusMsg, cx, bowlY + bowlSize * 0.56);
+  ctx.fillStyle = '#5C3D2E';
+  ctx.fillText(statusMsg, cx, bowlY + bowlSize * 0.56);
+  ctx.restore();
+
+  // 3. Draw Flying Ingredient Drops
+  for (const fd of flyingDrops) {
+    const im = sauceIngImgs[fd.id];
+    if (im && im.complete && im.naturalHeight > 0) {
+      const curX = fd.x + (fd.tx - fd.x) * fd.progress;
+      const curY = fd.y + (fd.ty - fd.y) * fd.progress - Math.sin(fd.progress * Math.PI) * 55;
+      ctx.save();
+      ctx.translate(curX, curY);
+      const sz = 44 * (1 - fd.progress * 0.3);
+      const ir = im.naturalWidth / im.naturalHeight;
+      ctx.drawImage(im, (-sz * ir) / 2, -sz / 2, sz * ir, sz);
+      ctx.restore();
+    }
+  }
+
+  // 4. Draw 5 Bottom Ingredient Cards (Initial Stack + Riffle Shuffle -> Deal Animation, then Fixed!)
+  const padX = 10;
+  const availW = canvas.width - padX * 2;
+  const gap = 6;
+  const btnW = (availW - gap * 4) / 5;
+  const btnH = 100;
+  const btnY = canvas.height - btnH - 46;
+  const centerBx = cx - btnW / 2;
+
+  sauceBtnRects = [];
+  shuffledSauceCards.forEach((def, i) => {
+    const targetBx = padX + i * (btnW + gap);
+    const recEntry = sauceRecipe.find(g => g.id === def.id);
+    const rem = recEntry ? (recEntry.target - recEntry.count) : 0;
+    const isCompleted = rem <= 0;
+
+    // Calculate animated position & rotation during initial card deal
+    let drawBx = targetBx;
+    let drawBy = btnY;
+    let cardRot = 0;
+    const p = sauceCardDealProgress;
+
+    if (p < 0.55) {
+      // Phase 1: Cards stacked in the center and visibly riffling/shuffling left & right
+      const shufflePhase = p / 0.55;
+      const wave = Math.sin(shufflePhase * Math.PI * 6 + i * 1.45);
+      const lift = Math.cos(shufflePhase * Math.PI * 6 + i * 1.1);
+      drawBx = centerBx + wave * 38;
+      drawBy = btnY - Math.abs(lift) * 12;
+      cardRot = wave * 0.16;
+    } else if (p < 1) {
+      // Phase 2: Smoothly deal/spread cards out from the center stack to their fixed random slots
+      const dealT = (p - 0.55) / 0.45;
+      const easeOut = 1 - Math.pow(1 - dealT, 3);
+      drawBx = centerBx + (targetBx - centerBx) * easeOut;
+      drawBy = btnY - Math.sin(dealT * Math.PI) * 10;
+      cardRot = (1 - easeOut) * ((i - 2) * 0.08);
+    }
+
+    sauceBtnRects.push({ id: def.id, x: targetBx, y: btnY, w: btnW, h: btnH });
+
+    ctx.save();
+    ctx.translate(drawBx + btnW / 2, drawBy + btnH / 2);
+    ctx.rotate(cardRot);
+    if (isCompleted) {
+      ctx.globalAlpha = 0.48;
+    }
+
+    ctx.fillStyle = isCompleted ? '#EFE8DC' : 'rgba(255, 255, 255, 0.96)';
+    ctx.strokeStyle = isCompleted ? '#C7B8A1' : '#8C5A3C';
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.roundRect(-btnW / 2, -btnH / 2, btnW, btnH, 14);
+    ctx.fill();
+    ctx.stroke();
+
+    const im = sauceIngImgs[def.id];
+    if (im && im.complete && im.naturalHeight > 0) {
+      const ir = im.naturalWidth / im.naturalHeight;
+      const iconH = 44;
+      const iconW = Math.min(btnW - 8, iconH * ir);
+      ctx.drawImage(im, -iconW / 2, -btnH / 2 + 12, iconW, iconH);
+    }
+
+    ctx.font = '900 12px Pretendard, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#3E271C';
+    ctx.fillText(def.name, 0, btnH / 2 - 22);
+
+    ctx.font = '900 11px Pretendard, sans-serif';
+    ctx.fillStyle = isCompleted ? '#2E7D32' : '#E65525';
+    ctx.fillText(isCompleted ? '정량완료✓' : `${rem}번 남음`, 0, btnH / 2 - 6);
+    ctx.restore();
+  });
+
+  drawParticlesAndTexts();
+  ctx.restore();
+}
+
+function drawParticlesAndTexts() {
+  for (const p of particles) {
+    ctx.save();
+    ctx.globalAlpha = Math.max(0, p.life / p.maxLife);
+    ctx.fillStyle = p.color;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  }
+
+  for (const ft of floatingTexts) {
+    ctx.save();
+    ctx.globalAlpha = Math.min(1, ft.life * 1.6);
+    ctx.font = '900 15.5px Pretendard, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.lineWidth = 4;
+    ctx.strokeStyle = '#FFFFFF';
+    ctx.strokeText(ft.text, ft.x, ft.y);
+    ctx.fillStyle = ft.color;
+    ctx.fillText(ft.text, ft.x, ft.y);
+    ctx.restore();
+  }
+}
+
+function finishGame() {
+  isPlaying = false;
+  clearInterval(countdownTimer);
+
+  // Check Mission Pass / Fail Conditions
+  let isSuccess = false;
+  if (currentMode === 'catch') {
+    isSuccess = score >= catchGoalScore; // 5,000점 이상 성공, 미만 실패
+  } else if (currentMode === 'mix') {
+    isSuccess = mixCount >= mixGoal;     // 50회 이상 성공, 미만 실패
+  } else {
+    isSuccess = sauceBowlsCompleted >= sauceGoalBowls; // 시간 내 미션(2그릇) 달성 성공, 미달성 실패
+  }
+
+  document.getElementById('screen-game').style.display = 'none';
+
+  if (isSuccess) {
+    playSoundEffect('win');
+    document.getElementById('screen-fail').style.display = 'none';
+    document.getElementById('screen-result').style.display = 'flex';
+
+    const summaryPill = document.getElementById('finalSummaryPill');
+    if (currentMode === 'catch') {
+      summaryPill.innerHTML = `재료 받기 미션 성공: <strong>${score.toLocaleString()}</strong>점 (최대 ${Math.max(1, maxCombo)}콤보!)`;
+    } else if (currentMode === 'mix') {
+      const rankTitle = mixCount >= 65 ? '전설의 비빔 신(神) 🔥' : '황금 손맛 비빔 달인 👍';
+      summaryPill.innerHTML = `폭풍 비비기 미션 성공: <strong>${mixCount}회</strong> 달성! (${rankTitle})`;
+    } else {
+      const sauceTitle = sauceBowlsCompleted >= 3 ? '35년 비법 전수자 등극 🏆' : '마약 특제소스 달인 🌶️';
+      summaryPill.innerHTML = `특제소스 미션 성공: <strong>${sauceBowlsCompleted}그릇</strong> 완성! (${sauceTitle})`;
+    }
+    refreshClock();
+  } else {
+    playSoundEffect('fail');
+    document.getElementById('screen-result').style.display = 'none';
+    document.getElementById('screen-fail').style.display = 'flex';
+
+    document.getElementById('failCharImg').src = faceMap[selectedChar].sad;
+    const failTitle = document.getElementById('failTitleTxt');
+    const failQuote = document.getElementById('failQuoteTxt');
+    const failScore = document.getElementById('failScoreSummary');
+    const failTarget = document.getElementById('failTargetGuide');
+
+    if (currentMode === 'catch') {
+      failTitle.textContent = '재료 받기 미션 실패! 😢';
+      failQuote.textContent = '"아깝다! 5,000점까지 조금만 더 받아볼까요?"';
+      failScore.innerHTML = `달성 점수: <strong>${score.toLocaleString()}점</strong> (부족한 점수: ${(catchGoalScore - score).toLocaleString()}점)`;
+      failTarget.innerHTML = '🎯 <strong>미션 성공 조건:</strong> 20초 동안 <strong>5,000점 이상</strong> 획득 시 1,000원 할인권 증정!';
+    } else if (currentMode === 'mix') {
+      failTitle.textContent = '폭풍 비비기 미션 실패! 😢';
+      failQuote.textContent = '"팔이 아파도 조금만 더 빠르게 비벼주세요!"';
+      failScore.innerHTML = `비빔 횟수: <strong>${mixCount}회</strong> (부족한 횟수: ${mixGoal - mixCount}회)`;
+      failTarget.innerHTML = '🎯 <strong>미션 성공 조건:</strong> 10초 동안 <strong>50회 이상</strong> 비비기 달성 시 1,000원 할인권 증정!';
+    } else {
+      failTitle.textContent = '특제소스 시간 내 미션 실패! 😢';
+      failQuote.textContent = '"섞인 카드 위치를 빠르게 파악해 정량대로 터치해 보세요!"';
+      failScore.innerHTML = `완성한 소스: <strong>${sauceBowlsCompleted} / ${sauceGoalBowls}그릇</strong>`;
+      failTarget.innerHTML = `🎯 <strong>미션 성공 조건:</strong> 15초 안에 황금비율 특제소스 <strong>${sauceGoalBowls}그릇 완성</strong> 시 1,000원 할인권 증정!`;
+    }
+  }
+}
+
+function refreshClock() {
+  const now = new Date();
+  const p = (n) => String(n).padStart(2, '0');
+  document.getElementById('liveClock').textContent =
+    `${now.getFullYear()}-${p(now.getMonth() + 1)}-${p(now.getDate())} ${p(now.getHours())}:${p(now.getMinutes())}:${p(now.getSeconds())}`;
+}
+setInterval(() => {
+  if (document.getElementById('screen-result').style.display === 'flex') {
+    refreshClock();
+  }
+}, 1000);
+
+function backToIntro() {
+  playSoundEffect('select');
+  document.getElementById('screen-result').style.display = 'none';
+  document.getElementById('screen-fail').style.display = 'none';
+  document.getElementById('screen-intro').style.display = 'flex';
+}
+</script>
+
+</body>
+</html>
