@@ -145,6 +145,7 @@
       color: var(--brown-dark);
       line-height: 1.12;
       letter-spacing: -0.5px;
+      word-break: keep-all;
       overflow-wrap: anywhere;
       text-wrap: balance;
       text-shadow: 0 2px 0 #F3E2C7;
@@ -811,7 +812,7 @@
       <div class="title-card">
         <div class="title-card-quote">오늘도 맛있는 하루, 조금 더 나은 우리!</div>
         {{ $titles := dict "ko" "초보 자영업 사장의 고군분투 성장기" "en" "Baekse Boribap Mini Game" "zh" "百世大麦饭 迷你游戏" "ja" "百世麦飯 ミニゲーム" "ru" "Мини-игра Бэксе Борибап" }}
-        <h1 class="title-card-main">{{ index $titles .Lang }}</h1>
+        <h1 class="title-card-main">{{ if eq .Lang "ko" }}초보 자영업 사장의<br>고군분투 성장기 🌱{{ else }}{{ index $titles .Lang }}{{ end }}</h1>
         <div class="title-brand-ribbon">백세보리밥 닭한마리</div>
         <img src="/img/game/item_chicken_hd.png" alt="꼬마닭" class="floating-chick">
       </div>
