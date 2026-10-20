@@ -3,7 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>{{ .Title }}</title>
+  <title>{{ .Params.seoTitle | default .Title }}</title>
+  <meta name="description" content="{{ .Description }}">
+  <link rel="canonical" href="{{ .Permalink }}">
+  <meta property="og:title" content="{{ .Params.seoTitle | default .Title }}">
+  <meta property="og:description" content="{{ .Description }}">
+  <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="{{ "img/game/game_bg.webp" | absURL }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Pretendard:wght@500;600;700;800;900&display=swap" rel="stylesheet">
@@ -138,6 +145,8 @@
       color: var(--brown-dark);
       line-height: 1.12;
       letter-spacing: -0.5px;
+      overflow-wrap: anywhere;
+      text-wrap: balance;
       text-shadow: 0 2px 0 #F3E2C7;
     }
     .title-brand-ribbon {
@@ -801,7 +810,8 @@
     <div class="intro-header">
       <div class="title-card">
         <div class="title-card-quote">오늘도 맛있는 하루, 조금 더 나은 우리!</div>
-        <div class="title-card-main">초보 자영업 사장의<br>고군분투 성장기 🌱</div>
+        {{ $titles := dict "ko" "초보 자영업 사장의 고군분투 성장기" "en" "Baekse Boribap Mini Game" "zh" "百世大麦饭 迷你游戏" "ja" "百世麦飯 ミニゲーム" "ru" "Мини-игра Бэксе Борибап" }}
+        <h1 class="title-card-main">{{ index $titles .Lang }}</h1>
         <div class="title-brand-ribbon">백세보리밥 닭한마리</div>
         <img src="/img/game/item_chicken_hd.png" alt="꼬마닭" class="floating-chick">
       </div>
