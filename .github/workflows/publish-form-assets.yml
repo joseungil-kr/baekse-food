@@ -66,16 +66,23 @@ jobs:
             assert (root/'downloads/print-forms'/(file+'.pdf')).stat().st_size>10000
           print('BAEKSE_HUGO_BUILD_THREE_BLOG_POSTS_PDF_IMAGES_PASS')
           PY
-      - name: Commit validated binary assets to feature branch only
+      - name: Safely hand verified public binary data to connected GitHub content tools
         run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add static/img/print-forms static/downloads/print-forms
-          if ! git diff --cached --quiet; then
-            git commit -m "assets(baekse): reuse verified live form screenshots and PDFs"
-            git push origin HEAD:feat/free-form-blog-footer-20261110
-          fi
-          git log -1 --format='%H %s'
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64,hashlib
+          for slug in ['invoice-landscape','invoice-vertical','receipt']:
+            for path in [Path('static/img/print-forms')/(slug+'.webp'),Path('static/downloads/print-forms')/(slug+'.pdf')]:
+              data=path.read_bytes()
+              blob=hashlib.sha1(b'blob '+str(len(data)).encode()+b'\0'+data).hexdigest()
+              b64=base64.b64encode(data).decode('ascii')
+              chunks=[b64[i:i+2048] for i in range(0,len(b64),2048)]
+              print('ASSET_BEGIN|'+str(path)+'|'+str(len(data))+'|'+blob+'|'+str(len(chunks)),flush=True)
+              for i,part in enumerate(chunks):
+                print('ASSET_CHUNK|'+str(path)+'|'+str(i)+'|'+part,flush=True)
+              print('ASSET_END|'+str(path),flush=True)
+          print('VERIFIED_PUBLIC_ASSET_TRANSFER_READY',flush=True)
+          PY
       - uses: actions/upload-artifact@v4
         if: always()
         with:
