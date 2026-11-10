@@ -1,0 +1,104 @@
+name: Baekse capture real free-form screenshots and blank PDFs
+on:
+  push:
+    branches: [feat/free-form-blog-footer-20261110]
+    paths:
+      - .github/workflows/capture-free-form-assets.yml
+  workflow_dispatch:
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/free-form-blog-footer-20261110
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium, real-page capture and PDF validation tools
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+          python3 -m pip install --quiet --user pillow pypdf
+      - name: Capture actual current pages (synthetic sample, no ERP data)
+        run: |
+          node scripts/capture-free-form-assets.mjs
+      - name: Convert actual screenshots to lightweight WebP and inspect three A4 PDF files
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          from pypdf import PdfReader
+          root=Path('static')
+          images=root/'img'/'print-forms'
+          images.mkdir(parents=True,exist_ok=True)
+          pdfs=root/'downloads'/'print-forms'
+          for name,portrait in [('invoice-landscape',False),('invoice-vertical',True),('receipt',True)]:
+            with Image.open('tmp-form-capture/'+name+'.png') as shot:
+              shot=shot.convert('RGB')
+              orig=shot.size
+              shot.thumbnail((1080,1370),Image.Resampling.LANCZOS)
+              out=images/(name+'.webp')
+              shot.save(out,'WEBP',quality=84,method=6)
+              with Image.open(out) as proof:
+                assert proof.width>500 and proof.height>450,(name,proof.size)
+              print('REAL_FORM_IMAGE_PASS',name,'original',orig,'published',shot.size,'bytes',out.stat().st_size)
+            path=pdfs/(name+'.pdf')
+            reader=PdfReader(str(path))
+            assert len(reader.pages)==1,(name,'page count',len(reader.pages))
+            width=float(reader.pages[0].mediabox.width)
+            height=float(reader.pages[0].mediabox.height)
+            assert 590<min(width,height)<600 and 835<max(width,height)<850,(name,'not A4',width,height)
+            assert (width<height)==portrait,(name,'orientation',width,height)
+            assert len(reader.pages[0].get_contents().get_data())>2500,(name,'empty PDF')
+            print('REAL_FORM_BLANK_PDF_PASS',name,'A4',int(width),int(height),'bytes',path.stat().st_size)
+          PY
+      - uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.152.2'
+          extended: true
+      - name: Validate generated Hugo pages and local image/PDF links before committing
+        run: |
+          hugo --minify --destination /tmp/baekse-blog-qa
+          python3 - <<'PY'
+          from pathlib import Path
+          root=Path('/tmp/baekse-blog-qa')
+          posts=['free-invoice-landscape','free-invoice-vertical','free-simple-receipt']
+          html=(root/'blog/index.html').read_text()
+          footer=(root/'index.html').read_text()
+          for url in ['/manual-invoice/','/manual-invoice-vertical/','/simple-receipt/']:
+            assert 'https://order.baeksefood.com'+url in footer,'Missing footer form link '+url
+          for post in posts:
+            path=root/'blog'/post/'index.html'
+            assert path.exists(),('Missing blog post',post)
+            article=path.read_text()
+            assert '빈 양식 PDF 다운로드' in article
+            assert ('/blog/'+post+'/') in html,'Blog card absent '+post
+          for file in ['invoice-landscape','invoice-vertical','receipt']:
+            assert (root/'img/print-forms'/(file+'.webp')).stat().st_size>5000
+            assert (root/'downloads/print-forms'/(file+'.pdf')).stat().st_size>10000
+          print('HUGO_BLOG_THREE_FORMS_WITH_REAL_IMAGES_PDFS_PASS')
+          PY
+      - name: Commit only verified binary assets to this feature branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add static/img/print-forms static/downloads/print-forms
+          if ! git diff --cached --quiet; then
+            git commit -m "assets(baekse): actual live screenshots and downloadable A4 PDFs"
+            git push origin HEAD:feat/free-form-blog-footer-20261110
+          fi
+          git log -1 --format='%H %s'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: baekse-three-free-forms-screens-and-pdfs
+          path: |
+            static/img/print-forms/
+            static/downloads/print-forms/
+            tmp-form-capture/
+          retention-days: 14
+          if-no-files-found: ignore
