@@ -23,6 +23,8 @@
       <p class="lead" style="max-width:640px">{{ .Description }}</p>
     </div>
 
+    {{ if eq .Lang "ko" }}{{ partial "free-forms-blog.html" . }}{{ end }}
+
     <div class="blog-grid">
       {{ $paginator := .Paginate .Pages 15 }}
       {{ range $paginator.Pages }}
