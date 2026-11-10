@@ -4,7 +4,8 @@ defaultContentLanguageInSubdir = false
 enableRobotsTXT = false
 summarylength = 40
 disableKinds = ["taxonomy", "term"]
-paginatePath = "page"
+[pagination]
+  path = "page"
 
 [params]
   rssSections = ["blog"]
@@ -21,6 +22,7 @@ paginatePath = "page"
 
 [languages]
   [languages.ko]
+    languageName = "한국어"
     locale = "ko-kr"
     label = "한국어"
     weight = 1
@@ -32,6 +34,7 @@ paginatePath = "page"
       defaultDescription = "35년 요식업 노하우, 원팩 시스템으로 조리 편차 없는 백세푸드 창업. 닭한마리·보리밥 산채정식·백세포차 3in1 브랜드로 인테리어 마진 0원, 본사 CK 직배송."
 
   [languages.en]
+    languageName = "EN"
     locale = "en-us"
     label = "EN"
     weight = 2
@@ -43,6 +46,7 @@ paginatePath = "page"
       defaultDescription = "35 years of Korean culinary heritage. One-pack system for effortless cooking. Dakhanmari, barley bibimbap, and night pocha franchise & recipe education."
 
   [languages.zh]
+    languageName = "中文"
     locale = "zh-cn"
     label = "中文"
     weight = 3
@@ -54,6 +58,7 @@ paginatePath = "page"
       defaultDescription = "35年韩国餐饮积淀，一包料标准化中央厨房配送，韩国一只鸡、大麦饭、百世大排档加盟及秘方传授。"
 
   [languages.ja]
+    languageName = "日本語"
     locale = "ja-jp"
     label = "日本語"
     weight = 4
@@ -65,6 +70,7 @@ paginatePath = "page"
       defaultDescription = "35年の飲食ノウハウ、ワンパックシステムでブレない味。タッカンマリ・麦飯・屋台ポチャ3in1ブランド＆秘伝レシピ伝授。"
 
   [languages.ru]
+    languageName = "RU"
     locale = "ru-ru"
     label = "RU"
     weight = 5

@@ -52,7 +52,7 @@
     <div class="lang-switcher">
       {{- range $i, $item := .AllTranslations -}}
         {{- if gt $i 0 -}}<span class="lang-dot">·</span>{{- end -}}
-        <a href="{{ $item.RelPermalink }}" class="lang-item {{ if eq $item.Lang $.Lang }}active{{ end }}">{{ $item.Language.Label }}</a>
+        <a href="{{ $item.RelPermalink }}" class="lang-item {{ if eq $item.Lang $.Lang }}active{{ end }}">{{ $item.Language.LanguageName }}</a>
       {{- end -}}
     </div>
   </nav>

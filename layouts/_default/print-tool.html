@@ -1,0 +1,29 @@
+{{ define "main" }}
+<section class="section free-form-article" style="border-top:none;padding-top:clamp(36px,5vh,68px)">
+  <div class="container">
+    <a href="{{ relLangURL "/blog/" }}" class="free-form-return">← 공식블로그로 돌아가기</a>
+    <header class="free-form-article-head">
+      <span class="eyebrow">BAEKSE FOOD · FREE FORMS</span>
+      <h1 class="h2">{{ .Title }}</h1>
+      <p class="lead">{{ .Description }}</p>
+      <p class="free-form-spec">{{ .Params.paperLabel }}</p>
+    </header>
+
+    <figure class="free-form-capture">
+      <a href="{{ .Params.toolUrl }}" target="_blank" rel="noopener noreferrer" aria-label="{{ .Title }} 실제 작성 페이지 열기">
+        <img src="{{ .Params.heroImage | absURL }}" alt="{{ .Params.heroImageAlt }}" loading="eager" decoding="async">
+      </a>
+      <figcaption>운영 중인 입력 화면을 브라우저에서 직접 캡처한 이미지입니다. 표시된 거래정보는 예시입니다.</figcaption>
+    </figure>
+
+    <div class="free-form-article-actions" aria-label="서식 사용 및 파일 다운로드">
+      <a class="btn btn-primary" href="{{ .Params.toolUrl }}" target="_blank" rel="noopener noreferrer">온라인 서식 바로 작성</a>
+      <a class="btn btn-outline" href="{{ .Params.pdfFile }}" download>빈 양식 PDF 다운로드</a>
+    </div>
+    <article class="free-form-article-body">{{ .Content }}</article>
+    <div class="free-form-article-actions">
+      <a class="btn btn-outline" href="{{ relLangURL "/blog/" }}">다른 무료 서식도 보기</a>
+    </div>
+  </div>
+</section>
+{{ end }}

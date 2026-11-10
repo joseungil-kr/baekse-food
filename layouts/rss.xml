@@ -16,7 +16,7 @@
 <title>{{ .Site.Title | transform.XMLEscape | safeHTML }}</title>
 <link>{{ .Site.Home.Permalink | transform.XMLEscape | safeHTML }}</link>
 <description>{{ .Site.Params.description | default .Site.Title | transform.XMLEscape | safeHTML }}</description>
-<language>{{ .Site.Language.Locale | default "ko" }}</language>
+<language>{{ .Site.Language.Lang | default "ko" }}</language>
 {{- with .OutputFormats.Get "RSS" }}
 <atom:link href="{{ .Permalink }}" rel="self" type="application/rss+xml" />
 {{- end }}

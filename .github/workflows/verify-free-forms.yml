@@ -1,0 +1,73 @@
+name: Verify Baekse free forms pages and real PDF files
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'layouts/**'
+      - 'content/blog/free-*.md'
+      - 'static/img/print-forms/**'
+      - 'static/downloads/print-forms/**'
+      - 'static/css/site.css'
+      - 'hugo.toml'
+      - '.github/workflows/verify-free-forms.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.152.2'
+          extended: true
+      - name: Install PDF validator
+        run: python3 -m pip install --quiet --user pypdf pillow
+      - name: Build actual Hugo output
+        run: hugo --minify --destination /tmp/baekse-forms-verified
+      - name: Verify homepage links, three blog posts, actual screenshots and PDFs
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from pypdf import PdfReader
+          from PIL import Image
+          root=Path('/tmp/baekse-forms-verified')
+          home=(root/'index.html').read_text()
+          blog=(root/'blog/index.html').read_text()
+          assert '한국어' in home and 'EN' in home,'Multilingual site header must remain available'
+          entries=[
+            ('invoice-landscape','manual-invoice','free-invoice-landscape',False),
+            ('invoice-vertical','manual-invoice-vertical','free-invoice-vertical',True),
+            ('receipt','simple-receipt','free-simple-receipt',True),
+          ]
+          for slug,route,article,portrait in entries:
+            assert 'https://order.baeksefood.com/'+route+'/' in home,('Home footer direct link',route)
+            assert '/blog/'+article+'/' in blog,('Blog listing article',article)
+            page=root/'blog'/article/'index.html'
+            assert page.is_file(),('Missing article',article)
+            text=page.read_text()
+            assert 'https://order.baeksefood.com/'+route+'/' in text
+            assert '빈 양식 PDF 다운로드' in text
+            assert '/img/print-forms/'+slug+'.webp' in text
+            assert '/downloads/print-forms/'+slug+'.pdf' in text
+            img=root/'img/print-forms'/(slug+'.webp')
+            pdf=root/'downloads/print-forms'/(slug+'.pdf')
+            with Image.open(img) as im:
+              assert im.width>500 and im.height>450,(slug,im.size)
+            assert img.stat().st_size>5000 and pdf.stat().st_size>10000,(slug,'asset too small')
+            doc=PdfReader(str(pdf))
+            assert len(doc.pages)==1,(slug,'not one A4 page')
+            w=float(doc.pages[0].mediabox.width)
+            h=float(doc.pages[0].mediabox.height)
+            assert 590<min(w,h)<600 and 835<max(w,h)<850,(slug,w,h)
+            assert (w<h)==portrait,(slug,'wrong A4 orientation')
+            print('BAEKSE_FORM_IMAGE_PDF_AND_LINK_PASS',slug,img.stat().st_size,pdf.stat().st_size)
+          assert (root/'index.xml').exists(),'RSS missing'
+          for route in ['en','zh','ja','ru']:
+            assert (root/route/'index.html').exists(),('Other language home missing',route)
+          print('BAEKSE_THREE_FORMS_HUGO_PASS')
+          PY

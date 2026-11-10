@@ -9,9 +9,17 @@
 {{- $blogText := "공식블로그" -}}
 {{- $gameText := "🎮 할인쿠폰 미니게임" -}}
 {{- $subText := "백세보리밥 산채정식 · 백세닭한마리 · 백세포차<br>35년 전통 · 본사 CK 팩토리 직영 · 인테리어 마진 0원" -}}
+{{- $formsTitle := "무료 업무서식" -}}
+{{- $form1 := "거래명세표 · A4 가로" -}}
+{{- $form2 := "거래명세표 · A4 세로" -}}
+{{- $form3 := "간이영수증" -}}
 
 {{- if eq $lang "en" -}}
   {{- $homeText = "Home" -}}
+  {{- $formsTitle = "Free Business Forms" -}}
+  {{- $form1 = "Invoice · A4 Landscape" -}}
+  {{- $form2 = "Invoice · A4 Portrait" -}}
+  {{- $form3 = "Simple Receipt" -}}
   {{- $academyText = "Recipe Academy" -}}
   {{- $sauceText = "Sauce Supply" -}}
   {{- $boribapText = "Barley Bibimbap" -}}
@@ -23,6 +31,10 @@
   {{- $subText = "Baekse Barley Rice · Dakhanmari · Night Pocha<br>35 Years Culinary Heritage · Direct CK Logistics" -}}
 {{- else if eq $lang "zh" -}}
   {{- $homeText = "首页" -}}
+  {{- $formsTitle = "免费业务表格" -}}
+  {{- $form1 = "交易明细单 · A4横向" -}}
+  {{- $form2 = "交易明细单 · A4纵向" -}}
+  {{- $form3 = "简易收据" -}}
   {{- $academyText = "秘方传授" -}}
   {{- $sauceText = "酱料供应" -}}
   {{- $boribapText = "大麦饭定食" -}}
@@ -34,6 +46,10 @@
   {{- $subText = "百世大麦饭 · 百世一只鸡 · 百世大排档<br>35年正宗餐饮 · 自营中央厨房直供" -}}
 {{- else if eq $lang "ja" -}}
   {{- $homeText = "ホーム" -}}
+  {{- $formsTitle = "無料ビジネス書式" -}}
+  {{- $form1 = "取引明細書 · A4横" -}}
+  {{- $form2 = "取引明細書 · A4縦" -}}
+  {{- $form3 = "簡易領収書" -}}
   {{- $academyText = "レシピ伝授" -}}
   {{- $sauceText = "ソース供給" -}}
   {{- $boribapText = "麦飯山菜定食" -}}
@@ -45,6 +61,10 @@
   {{- $subText = "百世麦飯 · 百世タッカンマリ · 百世ポチャ<br>35年の伝統 · 直営セントラルキッチン直送" -}}
 {{- else if eq $lang "ru" -}}
   {{- $homeText = "Главная" -}}
+  {{- $formsTitle = "Бесплатные бланки" -}}
+  {{- $form1 = "Накладная · A4 альбомный" -}}
+  {{- $form2 = "Накладная · A4 книжный" -}}
+  {{- $form3 = "Простая квитанция" -}}
   {{- $academyText = "Обучение" -}}
   {{- $sauceText = "Поставки соусов" -}}
   {{- $boribapText = "Корейская кухня" -}}
@@ -73,6 +93,12 @@
         <a href="{{ relLangURL "/sauce/" }}">{{ $sauceText }}</a>
         <a href="{{ relLangURL "/boribap/" }}">{{ $boribapText }}</a>
         <a href="{{ relLangURL "/sanchae/" }}">{{ $pochaText }}</a>
+      </div>
+      <div class="footer-form-links" aria-label="{{ $formsTitle }}">
+        <span class="label">{{ $formsTitle }}</span>
+        <a href="https://order.baeksefood.com/manual-invoice/" target="_blank" rel="noopener noreferrer">{{ $form1 }}</a>
+        <a href="https://order.baeksefood.com/manual-invoice-vertical/" target="_blank" rel="noopener noreferrer">{{ $form2 }}</a>
+        <a href="https://order.baeksefood.com/simple-receipt/" target="_blank" rel="noopener noreferrer">{{ $form3 }}</a>
       </div>
       <div>
         <span class="label">CONTACT</span>
