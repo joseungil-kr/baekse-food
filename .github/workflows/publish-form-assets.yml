@@ -53,6 +53,7 @@ jobs:
           main=(root/'index.html').read_text()
           blog=(root/'blog/index.html').read_text()
           assert '한국어' in main and 'EN' in main,'Multilingual header failed'
+          assert '<language>ko</language>' in (root/'index.xml').read_text(),'RSS language output failed'
           for route in ['manual-invoice','manual-invoice-vertical','simple-receipt']:
             assert 'https://order.baeksefood.com/'+route+'/' in main,'Missing footer link '+route
           for file,post in [('invoice-landscape','free-invoice-landscape'),('invoice-vertical','free-invoice-vertical'),('receipt','free-simple-receipt')]:
