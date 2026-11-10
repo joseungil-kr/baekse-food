@@ -69,6 +69,7 @@ jobs:
           posts=['free-invoice-landscape','free-invoice-vertical','free-simple-receipt']
           html=(root/'blog/index.html').read_text()
           footer=(root/'index.html').read_text()
+          assert '한국어' in footer and 'EN' in footer,'Shared multilingual header regressed'
           for url in ['/manual-invoice/','/manual-invoice-vertical/','/simple-receipt/']:
             assert 'https://order.baeksefood.com'+url in footer,'Missing footer form link '+url
           for post in posts:
