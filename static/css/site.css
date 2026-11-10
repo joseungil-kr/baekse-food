@@ -146,3 +146,53 @@ table.compare td.k { color: var(--dim); font-size: 12.5px; letter-spacing: .08em
 .blog-page-num { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; font-size: 14px; color: var(--dim); border: 1px solid var(--border); transition: all .2s; }
 .blog-page-num:hover { border-color: var(--accent); color: var(--accent); }
 .blog-page-num.active { background: var(--accent); border-color: var(--accent); color: #FFF7EF; }
+
+
+/* Baekse Food free-form hub: actual product screenshots, direct authoring links and PDF files. */
+.free-form-hub{margin:0 0 clamp(42px,6vh,74px);padding:clamp(24px,4vw,38px);border:1px solid rgba(245,241,232,.15);background:rgba(245,241,232,.025)}
+.free-form-hub-heading{margin-bottom:24px}
+.free-form-hub-heading .h2{font-size:clamp(25px,3vw,36px);margin:10px 0 12px}
+.free-form-hub-heading .lead{max-width:780px;margin:0}
+.free-form-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.free-form-card{min-width:0;display:flex;flex-direction:column;border:1px solid var(--border);background:rgba(245,241,232,.04);overflow:hidden}
+.free-form-card-image{display:flex;align-items:center;justify-content:center;background:#e6e8e8;height:192px;overflow:hidden}
+.free-form-card-image img{width:100%;height:100%;object-fit:contain;object-position:center;transition:transform .22s}
+.free-form-card-image:hover img{transform:scale(1.025)}
+.free-form-card-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:11px;padding:19px}
+.free-form-card-body .blog-tag{align-self:flex-start}
+.free-form-card-body h3{font-size:17px;line-height:1.5;margin:0;color:var(--text)}
+.free-form-card-body p{font-size:13px;line-height:1.8;color:var(--muted);margin:0;flex:1}
+.free-form-card-actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:6px}
+.free-form-card-actions a{display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;padding:10px 12px;border:1px solid rgba(245,241,232,.3);color:var(--text)}
+.free-form-card-actions a:last-child{border-color:rgba(240,115,59,.65);color:var(--accent-light)}
+.free-form-card-actions a:hover{background:rgba(240,115,59,.14);color:#fff}
+.free-form-return{display:inline-block;color:var(--accent-light);font-size:14px;margin-bottom:32px}
+.free-form-article-head{display:flex;flex-direction:column;gap:14px;margin:0 0 30px}
+.free-form-article-head .lead{max-width:800px;margin:0}
+.free-form-spec{font-weight:700;color:var(--accent-light);margin:0;font-size:14px}
+.free-form-capture{margin:0 auto 24px;max-width:920px;background:#eef1f2;border:1px solid rgba(245,241,232,.3);padding:12px}
+.free-form-capture a{display:block}
+.free-form-capture img{width:100%;max-height:740px;object-fit:contain;object-position:center}
+.free-form-capture figcaption{color:#52616b;font-size:12px;line-height:1.65;text-align:center;margin-top:10px}
+.free-form-article-actions{display:flex;flex-wrap:wrap;gap:12px;margin:22px 0 40px}
+.free-form-article-actions .btn{font-size:14px}
+.free-form-article-body{max-width:930px;font-size:16px;line-height:1.9;color:var(--muted)}
+.free-form-article-body h2{font-size:clamp(22px,2.7vw,30px);font-weight:700;color:var(--text);line-height:1.4;margin:32px 0 14px}
+.free-form-article-body p{margin:0 0 18px}
+.free-form-article-body ol,.free-form-article-body ul{margin:8px 0 24px;padding-left:1.5em}
+.free-form-article-body li{margin:6px 0}
+.free-form-article-body a{color:var(--accent-light);text-decoration:underline;text-underline-offset:3px}
+@media (max-width:960px){
+ .free-form-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .free-form-card:last-child{grid-column:span 2}
+}
+@media (max-width:670px){
+ .free-form-hub{padding:20px 14px}
+ .free-form-grid{grid-template-columns:minmax(0,1fr)}
+ .free-form-card:last-child{grid-column:auto}
+ .free-form-card-image{height:218px}
+ .free-form-article-actions{flex-direction:column}
+ .free-form-article-actions .btn{width:100%;text-align:center}
+ .free-form-capture{padding:7px}
+ .free-form-capture figcaption{font-size:11px}
+}
