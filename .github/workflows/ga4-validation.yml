@@ -1,0 +1,33 @@
+name: GA4 minimal installation validation
+on:
+  push:
+    branches: [ga4-install-20261113]
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.164.0'
+          extended: true
+      - run: hugo --destination /tmp/ga-off
+      - run: HUGO_PARAMS_GA4ID=G-3J550Y3YQG hugo --destination /tmp/ga-on
+      - run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          off=Path('/tmp/ga-off'); on=Path('/tmp/ga-on')
+          assert not any('data-ga4-id=' in p.read_text() for p in off.rglob('*.html'))
+          for route in ['index.html','en/index.html','zh/index.html','ja/index.html','ru/index.html']:
+            s=(on/route).read_text()
+            assert s.count('data-ga4-id="G-3J550Y3YQG"')==1,route
+          for f in off.rglob('*'):
+            if f.is_file():
+              target=on/f.relative_to(off)
+              assert target.exists()
+              if f.suffix!='.html': assert f.read_bytes()==target.read_bytes(),str(f)
+          print('PASS default-off, 5 language homes one ID, all non-HTML assets preserved')
+          PY
+      - run: node --check static/js/ga4-init.js

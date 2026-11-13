@@ -1,0 +1,4 @@
+{{- $id := .Site.Params.ga4id | default "" -}}
+{{- if and (eq hugo.Environment "production") (findRE "^G-[A-Z0-9]+$" $id) -}}
+<script defer src="/js/ga4-init.js" data-ga4-id="{{ $id }}"></script>
+{{- end -}}
